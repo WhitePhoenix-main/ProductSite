@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ProductsSite;
 
-namespace ProductsSite.Pages.Products
+namespace ProductsSite
 {
-    public class DeleteModel : PageModel
+    public class ProductDeleteModel : PageModel
     {
         private readonly ProductsSite.ProductsSiteContext _context;
 
-        public DeleteModel(ProductsSite.ProductsSiteContext context)
+        public ProductDeleteModel(ProductsSite.ProductsSiteContext context)
         {
             _context = context;
         }
@@ -52,7 +52,7 @@ namespace ProductsSite.Pages.Products
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Products/ProductIndex");
         }
     }
 }

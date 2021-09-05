@@ -1,0 +1,37 @@
+@page
+@model ProductsSite.ProductDetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Model.Product.Type
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Product.Type
+        </dd>
+        <dt class="col-sm-2">
+            @Model.Product.Name
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Product.Name
+        </dd>
+        <dt class="col-sm-2">
+            @Model.Product.Price
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Product.Price
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="/Products/ProductEdit" asp-route-id="@Model.Product.Id">Edit</a> |
+    <a asp-page="/Products/ProductIndex">Back to List</a>
+</div>

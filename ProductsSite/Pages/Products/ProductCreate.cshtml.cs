@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ProductsSite;
 
-namespace ProductsSite.Pages.Products
+namespace ProductsSite
 {
-    public class CreateModel : PageModel
+    public class ProductCreateModel : PageModel
     {
         private readonly ProductsSite.ProductsSiteContext _context;
 
-        public CreateModel(ProductsSite.ProductsSiteContext context)
+        public ProductCreateModel(ProductsSite.ProductsSiteContext context)
         {
             _context = context;
         }
@@ -37,7 +37,7 @@ namespace ProductsSite.Pages.Products
             _context.Product.Add(Product);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Products/ProductIndex");
         }
     }
 }

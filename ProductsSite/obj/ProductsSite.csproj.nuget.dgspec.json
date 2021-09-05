@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Solutions\\ProductsSite\\ProductsSite\\ProductsSite.csproj": {}
+    "E:\\Solutions\\ProductSite\\ProductsSite\\ProductsSite.csproj": {}
   },
   "projects": {
-    "E:\\Solutions\\ProductsSite\\ProductsSite\\ProductsSite.csproj": {
+    "E:\\Solutions\\ProductSite\\ProductsSite\\ProductsSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Solutions\\ProductsSite\\ProductsSite\\ProductsSite.csproj",
+        "projectUniqueName": "E:\\Solutions\\ProductSite\\ProductsSite\\ProductsSite.csproj",
         "projectName": "ProductsSite",
-        "projectPath": "E:\\Solutions\\ProductsSite\\ProductsSite\\ProductsSite.csproj",
+        "projectPath": "E:\\Solutions\\ProductSite\\ProductsSite\\ProductsSite.csproj",
         "packagesPath": "C:\\Users\\Денис\\.nuget\\packages\\",
-        "outputPath": "E:\\Solutions\\ProductsSite\\ProductsSite\\obj\\",
+        "outputPath": "E:\\Solutions\\ProductSite\\ProductsSite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Денис\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -8,13 +8,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProductsSite;
 
-namespace ProductsSite.Pages.Products
+namespace ProductsSite
 {
-    public class EditModel : PageModel
+    public class ProductEditModel : PageModel
     {
         private readonly ProductsSite.ProductsSiteContext _context;
 
-        public EditModel(ProductsSite.ProductsSiteContext context)
+        public ProductEditModel(ProductsSite.ProductsSiteContext context)
         {
             _context = context;
         }
@@ -65,7 +65,7 @@ namespace ProductsSite.Pages.Products
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Products/ProductIndex");
         }
 
         private bool ProductExists(int id)

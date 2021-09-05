@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using ProductsSite;
 
-namespace ProductsSite.Pages.Products
+namespace ProductsSite
 {
-    public class DetailsModel : PageModel
+    public class ProductDetailsModel : PageModel
     {
         private readonly ProductsSite.ProductsSiteContext _context;
 
-        public DetailsModel(ProductsSite.ProductsSiteContext context)
+        public ProductDetailsModel(ProductsSite.ProductsSiteContext context)
         {
             _context = context;
         }
