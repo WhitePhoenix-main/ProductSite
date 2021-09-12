@@ -40,6 +40,7 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "5.0.9",
           "Microsoft.EntityFrameworkCore.Tools": "5.0.9",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "5.0.2",
+          "jQuery.Validation.Globalize": "1.1.0",
           "Microsoft.AspNetCore.Antiforgery": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "5.0.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "5.0.0.0",
@@ -324,6 +325,7 @@
           "ProductsSite.dll": {}
         }
       },
+      "cldrjs/0.4.1": {},
       "Humanizer.Core/2.8.26": {
         "runtime": {
           "lib/netstandard2.0/Humanizer.dll": {
@@ -333,6 +335,23 @@
         },
         "compile": {
           "lib/netstandard2.0/Humanizer.dll": {}
+        }
+      },
+      "jQuery/1.4.4": {},
+      "jquery-globalize/1.0.0": {
+        "dependencies": {
+          "cldrjs": "0.4.1"
+        }
+      },
+      "jQuery.Validation/1.14.0": {
+        "dependencies": {
+          "jQuery": "1.4.4"
+        }
+      },
+      "jQuery.Validation.Globalize/1.1.0": {
+        "dependencies": {
+          "jQuery.Validation": "1.14.0",
+          "jquery-globalize": "1.0.0"
         }
       },
       "Microsoft.AspNetCore.Cryptography.Internal/5.0.9": {
@@ -3783,12 +3802,47 @@
       "serviceable": false,
       "sha512": ""
     },
+    "cldrjs/0.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-WQ5Ey4MYeDjzFMSmaB6zDhxcjn+DN2zB2ahYemOZiQ1WhrMI8mXz/ssv3difmF545sOSmrliHOzRmjst6+Kd8Q==",
+      "path": "cldrjs/0.4.1",
+      "hashPath": "cldrjs.0.4.1.nupkg.sha512"
+    },
     "Humanizer.Core/2.8.26": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-OiKusGL20vby4uDEswj2IgkdchC1yQ6rwbIkZDVBPIR6al2b7n3pC91elBul9q33KaBgRKhbZH3+2Ur4fnWx2A==",
       "path": "humanizer.core/2.8.26",
       "hashPath": "humanizer.core.2.8.26.nupkg.sha512"
+    },
+    "jQuery/1.4.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kexCeYIZehR5fRjo8CK1sngN5SZEQRFNfCYZHMS1RxwEEiSKetBw/gliYJcLJdJEBB+e9aHqleLCjuaSI7u23g==",
+      "path": "jquery/1.4.4",
+      "hashPath": "jquery.1.4.4.nupkg.sha512"
+    },
+    "jquery-globalize/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-lQMu3s31x6fy6uC/sSOnjl1FPbHkhhswKvGuvXMChEWImC+CKAQZ9YscMnNn94T9w4KHXoG9NSipXlgFbgBXYg==",
+      "path": "jquery-globalize/1.0.0",
+      "hashPath": "jquery-globalize.1.0.0.nupkg.sha512"
+    },
+    "jQuery.Validation/1.14.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-gNwKPzHsNk/TbLQVCUl4vagUMoCfdnKQwKf2uy+grKFlSK3J872/4xrABIfKWdhSgK2sAYijDswQq6Z82d5S1w==",
+      "path": "jquery.validation/1.14.0",
+      "hashPath": "jquery.validation.1.14.0.nupkg.sha512"
+    },
+    "jQuery.Validation.Globalize/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qzka221RX45z642DOhlxGg/wvW4w8Md2Q02deZ0j6EfgyQEnXdLAeHw5xMK9EuFCjWoRbmISt/oFsJAvKqnmCA==",
+      "path": "jquery.validation.globalize/1.1.0",
+      "hashPath": "jquery.validation.globalize.1.1.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/5.0.9": {
       "type": "package",

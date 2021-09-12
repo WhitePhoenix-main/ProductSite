@@ -29,8 +29,8 @@ namespace ProductsSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                  options.UseSqlite(
+                      Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -53,7 +53,7 @@ namespace ProductsSite
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseRequestLocalization("en-UY", "fr-FR", "ru-En");
+            //app.UseRequestLocalization("en-UY", "ru-UY", "fr-FR");
             
             app.UseHttpsRedirection();
             app.UseStaticFiles();

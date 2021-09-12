@@ -1,10 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "/WA8lWsPYmZzYb1qNA8j8fbguSvaN9crYD8WTw+cbE/z/YRWGTqxx187FWhwQs1nhxfEPOq8sn92/El7fbizYw==",
+  "dgSpecHash": "1MvH47W5KUy20yFbE7QEXOseqplKi5lYOgM67RLM1DqvWqhLHzTvWR23+XWdn2VkkEk/Wmx+RGC09CW4iTrjxQ==",
   "success": true,
   "projectFilePath": "E:\\Solutions\\ProductSite\\ProductsSite\\ProductsSite.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Денис\\.nuget\\packages\\cldrjs\\0.4.1\\cldrjs.0.4.1.nupkg.sha512",
     "C:\\Users\\Денис\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Денис\\.nuget\\packages\\jquery\\1.4.4\\jquery.1.4.4.nupkg.sha512",
+    "C:\\Users\\Денис\\.nuget\\packages\\jquery-globalize\\1.0.0\\jquery-globalize.1.0.0.nupkg.sha512",
+    "C:\\Users\\Денис\\.nuget\\packages\\jquery.validation\\1.14.0\\jquery.validation.1.14.0.nupkg.sha512",
+    "C:\\Users\\Денис\\.nuget\\packages\\jquery.validation.globalize\\1.1.0\\jquery.validation.globalize.1.1.0.nupkg.sha512",
     "C:\\Users\\Денис\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.9\\microsoft.aspnetcore.cryptography.internal.5.0.9.nupkg.sha512",
     "C:\\Users\\Денис\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\5.0.9\\microsoft.aspnetcore.cryptography.keyderivation.5.0.9.nupkg.sha512",
     "C:\\Users\\Денис\\.nuget\\packages\\microsoft.aspnetcore.diagnostics.entityframeworkcore\\5.0.9\\microsoft.aspnetcore.diagnostics.entityframeworkcore.5.0.9.nupkg.sha512",

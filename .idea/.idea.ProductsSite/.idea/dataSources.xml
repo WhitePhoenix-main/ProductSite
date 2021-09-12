@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:E:\Solutions\ProductsSite\ProductsSite\app.db</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="app [2]" uuid="8ccbdfd5-889d-4c28-b9bb-c19d00dfcdab">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:E:\Solutions\ProductSite\ProductsSite\app.db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

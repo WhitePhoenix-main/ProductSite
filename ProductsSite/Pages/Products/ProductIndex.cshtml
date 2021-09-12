@@ -13,30 +13,37 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                Тип продукта
-            </th>
-            <th>
-                Название продукта
-            </th>
-            <th>
-                Цена
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            Тип продукта
+        </th>
+        <th>
+            Название продукта
+        </th>
+        <th>
+            Цена
+        </th>
+        <th>
+            Время
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Product) {
+    @foreach (var item in Model.Product)
+    {
         <tr>
             <td>
-                @item.Type
+                @item.ProductType
             </td>
             <td>
-                @item.Name
+                @item.ProductName
             </td>
             <td>
                 @item.Price
+            </td>
+            <td>
+                @item.ProductDate
             </td>
             <td>
                 <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a> |
@@ -44,6 +51,6 @@
                 <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
