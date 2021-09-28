@@ -1,6 +1,7 @@
 ﻿    using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.AspNetCore.Http;
 
     namespace ProductsSite
     {
@@ -8,13 +9,15 @@
         {
             public int Id { get; set; }
             public string? ProductType { get; set; }
-            public string ProductName { get; set; }
+            public string ProductName { get; set; } = "";
             
             public DateTime? ProductDate { get; set; }
-            //Переписал тип цены с decimal на string
-            public int? Price { get; set; }
+            public int Price { get; set; }
+
+            public string? PreviewName { get; set; }
+
+            public bool OnPreview { get; set; }
+            [NotMapped] public string? PriceInput { get; set; }
             
-            [NotMapped]
-            public string? PriceInput { get; set; }
         }
     }

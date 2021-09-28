@@ -1,7 +1,9 @@
 @page
 @System.Globalization.CultureInfo.CurrentUICulture
+@using Microsoft.CodeAnalysis
 @model ProductsSite.ProductIndexModel
-
+@inject IProductsRepository _productsRepository
+<link rel="stylesheet" href="~/css/productsBox.css"/>
 @{
     ViewData["Title"] = "Index";
 }
@@ -11,46 +13,28 @@
 <p>
     <a asp-page="/Products/ProductCreate">Create New</a>
 </p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            Тип продукта
-        </th>
-        <th>
-            Название продукта
-        </th>
-        <th>
-            Цена
-        </th>
-        <th>
-            Время
-        </th>
-        <th></th>
-    </tr>
+<thead>
     </thead>
     <tbody>
     @foreach (var item in Model.Product)
     {
-        <tr>
-            <td>
-                @item.ProductType
-            </td>
-            <td>
-                @item.ProductName
-            </td>
-            <td>
-                @item.Price
-            </td>
-            <td>
-                @item.ProductDate
-            </td>
-            <td>
-                <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+        var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+        <div class="product-box">
+            <div class="product-inner">
+                <div class="product-wrap">
+                    <img src="@_productsRepository.GetPic(item)">
+                    <div class="actions">
+                        <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a>
+                        <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title"><a href="">@item.ProductName</a></h3>
+                    <span class="price">@priceOut ₽</span>
+                </div>
+            </div>
+        </div>
+        
     }
     </tbody>
-</table>

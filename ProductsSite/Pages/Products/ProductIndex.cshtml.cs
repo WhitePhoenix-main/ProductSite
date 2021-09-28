@@ -23,7 +23,7 @@ namespace ProductsSite
         public async Task OnGetAsync()
         {
             Product = await _context.Product.ToListAsync();
-            
         }
+        
     }
 }

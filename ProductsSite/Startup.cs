@@ -38,6 +38,8 @@ namespace ProductsSite
 
             services.AddDbContext<ProductsSiteContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("ProductsSiteContext")));
+            services.AddTransient<INormalizer, Normalizer>();
+            services.AddTransient<IProductsRepository, ProductsRepository>();
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,14 +14,20 @@ namespace ProductsSite
 {
     public class ProductEditModel : PageModel
     {
-        private readonly ProductsSite.ProductsSiteContext _context;
+        private ProductsSite.ProductsSiteContext _context { get; init; }
+        private INormalizer _normalizer { get; init; }
 
-        public ProductEditModel(ProductsSite.ProductsSiteContext context)
+        private IProductsRepository _productsRepository { get; init; }
+
+        public ProductEditModel(ProductsSite.ProductsSiteContext context, INormalizer normalizer,
+            IProductsRepository productsRepository)
         {
             _context = context;
+            _normalizer = normalizer;
+            _productsRepository = productsRepository;
         }
 
-        [BindProperty] public Product Product { get; set; }
+        [BindProperty] public Product? Product { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -44,39 +51,50 @@ namespace ProductsSite
         public async Task<IActionResult> OnPostAsync()
         {
             //ModelState.AddModelError(nameof(Product.Price), "error message from controller");
-            if (Product.PriceInput != null)
+            if (Product != null)
             {
-                Normalaizer norm = new Normalaizer(Product.PriceInput);
-                if (norm.GetNormStrRu() == -1)
+                if (Product.PriceInput != null)
                 {
-                    ModelState.AddModelError(nameof(Product.Price), "error during input");
-                }
-                else
-                {
-                    Product.Price = norm.GetNormStrRu();
-                }
-            }
+                    var norm = _normalizer.GetNormStrRu(Product.PriceInput);
 
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            _context.Attach(Product).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductExists(Product.Id))
-                {
-                    return NotFound();
+                    if (norm == -1)
+                    {
+                        ModelState.AddModelError(nameof(Product.Price), "error during input");
+                    }
+                    else
+                    {
+                        Product.Price = norm;
+                    }
                 }
-                else
+                
+                var file = Request.Form.Files.FirstOrDefault();
+                if (file is not null && file.Length > 0)
                 {
-                    throw;
+                    var result = await _productsRepository.SaveFileAsync(Product, file);
+                    
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return Page();
+                }
+
+                _context.Attach(Product).State = EntityState.Modified;
+
+                try
+                {
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ProductExists(Product.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
             }
 

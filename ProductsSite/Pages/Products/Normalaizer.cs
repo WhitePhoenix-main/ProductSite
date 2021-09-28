@@ -2,20 +2,19 @@
 
 namespace ProductsSite
 {
-    public class Normalaizer
+    public interface INormalizer
     {
-        public string strToNorm;
-        
-        public Normalaizer(string str)
-        {
-            strToNorm = str;
-        }
-        public int GetNormStrRu()
+        int GetNormStrRu(string strToNorm);
+    }
+    public class Normalizer : INormalizer
+    {
+         public int GetNormStrRu(string strToNorm)
         {
             string buffer = "";
             int normPrice = 0;
             const int symAfter = 2;
             int symAfterCount = 0;
+            Boolean pointCheck = false;
             for (int counter1 = 0; counter1 < strToNorm.Length; counter1++)
             {
                 if (strToNorm[counter1] == '.' || strToNorm[counter1] == ',')
@@ -25,15 +24,22 @@ namespace ProductsSite
                     {
                         buffer += strToNorm[counter1];
                     }
+
+                    pointCheck = true;
                     break;
                 }
                 buffer += strToNorm[counter1];
+            }
+
+            if (!pointCheck)
+            {
+                buffer += "00";
             }
             try
             {
                 normPrice = Int32.Parse(buffer);
             }
-            catch (FormatException e)
+            catch (FormatException)
             {
                 return -1;
             }

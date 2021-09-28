@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +34,8 @@ namespace ProductsSite
             {
                 return Page();
             }
-
             _context.Product.Add(Product);
             await _context.SaveChangesAsync();
-
             return RedirectToPage("/Products/ProductIndex");
         }
     }

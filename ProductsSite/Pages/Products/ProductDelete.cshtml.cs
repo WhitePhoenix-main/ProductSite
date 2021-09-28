@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -13,9 +14,12 @@ namespace ProductsSite
     {
         private readonly ProductsSite.ProductsSiteContext _context;
 
-        public ProductDeleteModel(ProductsSite.ProductsSiteContext context)
+        private IProductsRepository _productsRepository;
+
+        public ProductDeleteModel(ProductsSite.ProductsSiteContext context, IProductsRepository productsRepository)
         {
             _context = context;
+            _productsRepository = productsRepository;
         }
 
         [BindProperty]
@@ -49,9 +53,9 @@ namespace ProductsSite
             if (Product != null)
             {
                 _context.Product.Remove(Product);
+                _productsRepository.DelFolder(_productsRepository.GetFolder(Product));
                 await _context.SaveChangesAsync();
             }
-
             return RedirectToPage("/Products/ProductIndex");
         }
     }
