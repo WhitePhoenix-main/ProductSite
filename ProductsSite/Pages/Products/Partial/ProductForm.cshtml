@@ -1,0 +1,71 @@
+﻿@using Microsoft.EntityFrameworkCore
+@model IHasProduct
+@inject ProductsSite.ProductsSiteContext _context
+
+@{
+    var productTypes = await _context.Set<Product>()
+        .AsNoTracking()
+        .Select(x => x.ProductType)
+        .Distinct()
+        .OrderBy(x => x)
+        .Select(x => new SelectListItem(x, x))
+        .ToListAsync();
+}
+<script>
+    function toggleFields() {
+        $('#selector').toggle();
+        $('#selectorNew').toggle();
+    }
+</script>
+<form method="post">
+    <input type="hidden" asp-for="Product.Id"/>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group" id="selector">
+        <label asp-for="Product.ProductType" class="control-label"></label>
+        <select asp-for="Product.ProductType" asp-items="productTypes">
+        </select>
+        <span asp-validation-for="Product.ProductType" class="text-danger"></span>
+    </div>
+    <div>
+        <span onclick="toggleFields()">+/-</span>
+    </div>
+
+    <div class="form-group" id="selectorNew" style="display: none">
+        <label asp-for="Product.ProductTypeNew" class="control-label">Ввод нового типа</label>
+        <input asp-for="Product.ProductTypeNew" class="form-control"/>
+        <span asp-validation-for="Product.ProductTypeNew" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.ProductName" class="control-label"></label>
+        <input asp-for="Product.ProductName" class="form-control"/>
+        <span asp-validation-for="Product.ProductName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.Price" class="control-label"></label>
+        <input asp-for="Product.Price" class="form-control"/>
+        <span asp-validation-for="Product.Price" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Product.ProductDate" class="control-label"></label>
+        <input asp-for="Product.ProductDate" class="form-control"/>
+        <span asp-validation-for="Product.ProductDate" class="text-danger"></span>
+    </div>
+    @if (!Model.IsNewRec)
+    {
+        <dl>
+            <dt>
+
+            </dt>
+            <dd>
+                <input type="file" name="pic">
+            </dd>
+            <dd>
+                <input type="checkbox" asp-for="Product.OnPreview"/>
+            </dd>
+        </dl>
+    }
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </div>
+
+</form>

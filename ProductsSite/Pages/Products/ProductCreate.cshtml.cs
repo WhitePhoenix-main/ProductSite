@@ -10,7 +10,7 @@ using ProductsSite;
 
 namespace ProductsSite
 {
-    public class ProductCreateModel : PageModel
+    public class ProductCreateModel : PageModel, IHasProduct
     {
         private readonly ProductsSite.ProductsSiteContext _context;
 
@@ -27,12 +27,19 @@ namespace ProductsSite
         [BindProperty]
         public Product Product { get; set; }
 
+        public bool IsNewRec { get; set; } = true;
+
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
+            }
+
+            if (!String.IsNullOrWhiteSpace(Product.ProductTypeNew))
+            {
+                Product.ProductType = Product.ProductTypeNew;
             }
             _context.Product.Add(Product);
             await _context.SaveChangesAsync();

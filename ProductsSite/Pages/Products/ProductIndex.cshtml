@@ -22,7 +22,9 @@
         <div class="product-box">
             <div class="product-inner">
                 <div class="product-wrap">
-                    <img src="@_productsRepository.GetPic(item)">
+                    <div class="pic">
+                        <img src="@_productsRepository.GetPic(item)"/>
+                        </div>
                     <div class="actions">
                         <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a>
                         <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a>

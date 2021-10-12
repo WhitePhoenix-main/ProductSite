@@ -12,7 +12,7 @@ using ProductsSite;
 
 namespace ProductsSite
 {
-    public class ProductEditModel : PageModel
+    public class ProductEditModel : PageModel, IHasProduct
     {
         private ProductsSite.ProductsSiteContext _context { get; init; }
         private INormalizer _normalizer { get; init; }
@@ -28,6 +28,7 @@ namespace ProductsSite
         }
 
         [BindProperty] public Product? Product { get; set; }
+        public bool IsNewRec { get; set; } = false;
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -51,7 +52,17 @@ namespace ProductsSite
         public async Task<IActionResult> OnPostAsync()
         {
             //ModelState.AddModelError(nameof(Product.Price), "error message from controller");
-            if (Product != null)
+
+            if (Product == null)
+            {
+                ModelState.AddModelError(nameof(Product), "error during input");
+                return Page();
+            }
+            if (!String.IsNullOrWhiteSpace(Product.ProductTypeNew))
+            {
+                Product.ProductType = Product.ProductTypeNew;
+            }
+//            if (Product != null)
             {
                 if (Product.PriceInput != null)
                 {
@@ -65,6 +76,7 @@ namespace ProductsSite
                     {
                         Product.Price = norm;
                     }
+                    
                 }
                 
                 var file = Request.Form.Files.FirstOrDefault();
@@ -79,24 +91,22 @@ namespace ProductsSite
                     return Page();
                 }
 
-                _context.Attach(Product).State = EntityState.Modified;
+                var oldProduct = await _context.Set<Product>()
+                    .FirstOrDefaultAsync(x => x.Id == Product.Id);
+                if (oldProduct is null)
+                {
+                    return NotFound();
+                }
 
-                try
-                {
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(Product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                oldProduct.ProductType = Product.ProductType;
+                oldProduct.Price = Product.Price;
+                oldProduct.ProductName = Product.ProductName;
+                oldProduct.ProductDate = Product.ProductDate;
+                // ......
+                _context.Update(oldProduct);
+                await _context.SaveChangesAsync();
             }
+            Console.WriteLine(Product.OnPreview);
 
             return RedirectToPage("/Products/ProductIndex");
         }

@@ -21,8 +21,11 @@
     margin-bottom: 15px;
 }
 .product-wrap img {
-    display: inline;
-    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    max-width: 100%;
 }
 .actions {
     position: absolute;
@@ -76,3 +79,10 @@
     font-weight: bold;
     color: #bca480;
 }
+
+.pic {
+    position: relative;
+    padding-top: 66%;
+    overflow: hidden;
+}
+

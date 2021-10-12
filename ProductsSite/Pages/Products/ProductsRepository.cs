@@ -13,7 +13,7 @@ namespace ProductsSite
 
         public string GetFolder(Product product);
 
-        public void DelFolder(string path);
+        public void DelFolderWithFiles(string path);
     }
 
     public class ProductsRepository : IProductsRepository
@@ -50,6 +50,7 @@ namespace ProductsSite
 
         public async Task<(bool success, string? errorMessage)> SaveFileAsync(Product product, IFormFile formFile)
         {
+            string prev = product.PreviewName;
             string dir = GetDir(product);
             if (!System.IO.Directory.Exists(dir))
             {
@@ -68,11 +69,19 @@ namespace ProductsSite
             await using var stream = System.IO.File.Open(path, FileMode.CreateNew);
             await formFile.CopyToAsync(stream);
             stream.Close();
-            product.PreviewName = fileName;
+            if (product.OnPreview)
+            {
+                product.PreviewName = fileName;
+            }
+            else
+            {
+                product.PreviewName = prev;
+            }
+
             return (true, null);
         }
 
-        public void DelFolder(string path)
+        public void DelFolderWithFiles(string path)//DelDirectoryWithFiles
         {
             if (Directory.Exists(path))
             {
@@ -80,6 +89,11 @@ namespace ProductsSite
                 foreach (var file in files)
                 {
                     File.Delete(Path.Combine(path, file));
+                }
+                var directories = Directory.GetDirectories(path);
+                foreach (var dirPath in directories)
+                {
+                    DelFolderWithFiles(dirPath);
                 }
                 Directory.Delete(path);
             }

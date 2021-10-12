@@ -53,7 +53,7 @@ namespace ProductsSite
             if (Product != null)
             {
                 _context.Product.Remove(Product);
-                _productsRepository.DelFolder(_productsRepository.GetFolder(Product));
+                _productsRepository.DelFolderWithFiles(_productsRepository.GetFolder(Product));
                 await _context.SaveChangesAsync();
             }
             return RedirectToPage("/Products/ProductIndex");

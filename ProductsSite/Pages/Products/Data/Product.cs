@@ -16,8 +16,10 @@
 
             public string? PreviewName { get; set; }
 
-            public bool OnPreview { get; set; }
+            [NotMapped] public bool OnPreview { get; set; }
             [NotMapped] public string? PriceInput { get; set; }
+            
+            [NotMapped] public string? ProductTypeNew { get; set; }
             
         }
     }
