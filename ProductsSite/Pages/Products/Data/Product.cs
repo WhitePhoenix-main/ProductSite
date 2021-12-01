@@ -7,7 +7,8 @@
     {
         public class Product
         {
-            public int Id { get; set; }
+            [Key] public string Id { get; set; } = "";
+            //Категория ИД
             public string? ProductType { get; set; }
             public string ProductName { get; set; } = "";
             
@@ -15,11 +16,13 @@
             public int Price { get; set; }
 
             public string? PreviewName { get; set; }
-
+// Наличие Товара
             [NotMapped] public bool OnPreview { get; set; }
             [NotMapped] public string? PriceInput { get; set; }
             
             [NotMapped] public string? ProductTypeNew { get; set; }
+            
+            [NotMapped] public string? ProductSearch { get; set; }
             
         }
     }

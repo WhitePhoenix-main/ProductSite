@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using ProductsSite.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -32,12 +31,20 @@ namespace ProductsSite
             .AddControllersWithViews()
             .AddRazorRuntimeCompilation();
             
-            services.AddDbContext<ApplicationDbContext>(options =>
-                  options.UseSqlite(
-                      Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<SiteUsers, IdentityRole>(
+
+  
+                    options => 
+                    options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ProductsSiteContext>();
+            //     options)    =>
+            //     {
+            //         options.SignIn.RequireConfirmedAccount = true;
+            //         options.Password.RequireDigit = true;
+            //         options.Password.RequiredLength = 3;
+            //     })
+            //     .AddEntityFrameworkStores<ProductsSiteContext>();
             services.AddRazorPages();
 
             services.AddDbContext<ProductsSiteContext>(options =>
@@ -51,7 +58,7 @@ namespace ProductsSite
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseMigrationsEndPoint();
+                    app.UseMigrationsEndPoint();
             }
             else
             {
@@ -66,8 +73,8 @@ namespace ProductsSite
 
             app.UseRouting();
 
-            app.UseAuthentication();
-            app.UseAuthorization();
+             app.UseAuthentication();
+             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapRazorPages(); });
         }

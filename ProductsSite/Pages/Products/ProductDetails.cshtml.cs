@@ -20,8 +20,9 @@ namespace ProductsSite
 
         public Product Product { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string? id)
         {
+            // TODO: Проверка на пустую строку
             if (id == null)
             {
                 return NotFound();

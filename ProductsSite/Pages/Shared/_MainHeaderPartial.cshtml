@@ -1,0 +1,102 @@
+﻿@inject ProductsSiteContext _context
+<head>
+    <div class="top-header">
+        <div class="container">
+            <div class="row">
+                <ul class="header-links col-4">
+                    <li>
+                        <a href="#"> <i class="bi bi-geo-alt"></i>Иркутск</a>
+                    </li>
+                </ul>
+                <ul class="header-links col-5">
+                    <li>
+                        <a href="#">Магазины</a>
+                    </li>
+                    <li>
+                        <a href="#">Покупателям</a>
+                    </li>
+                    <li>
+                        <a href="#">Юридическим лицам</a>
+                    </li>
+                    <li>
+                        <a href="#">Club</a>
+                    </li>
+                </ul>
+                <ul class="header-links col-3">
+                    <li>
+                        <a href="#"><i class="bi bi-telephone"></i> 8-800-88-88-888</a>
+                        <span id="header-work-time">(c 08:00 до 03:00)</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <a href="/Index">
+                    <div class="logo">
+                        <span>EnixShop</span>
+                    </div>
+                    </a>
+                </div>
+                <div class="col-md-7">
+                    <div class="header-search">
+                        <partial name="_FindFormPartial"/>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="header-btn">
+                        <div class="cart-btn">
+                            <a asp-area="Identity" asp-page="Account/Login">
+                                <div>
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div>текст</div>
+                            </a>
+                        </div>
+                        <div class="wishlist-btn">
+                            <a asp-area="Identity" asp-page="Account/Login">
+                                <div>
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div>текст</div>
+                            </a>
+                        </div>
+                    @if (User.Identity?.IsAuthenticated == false)
+                    {
+                        <div class="login-btn">
+                            <a asp-area="Identity" asp-page="Account/Login">
+                                <div>
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div>Вход</div>
+                            </a>
+                        </div>
+                    }
+                    @if (User.Identity?.IsAuthenticated == true)
+                    {
+                        <div class="login-btn">
+                            <a asp-area="Identity" asp-page="Account/Logout">
+                                <div>
+                                    <i class="bi bi-person-circle"></i>
+                                </div>
+                                <div>Выход</div>
+                            </a>
+                        </div> 
+                    }
+                    
+                     </div >
+
+                    @*<a class="login-btn" asp-area="Identity" asp-page="Account/Login">
+                        <li>
+                            <i class="bi bi-person-circle"></i>
+                        </li>Войти
+                    </a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</head>

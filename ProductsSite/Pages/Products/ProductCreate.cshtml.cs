@@ -21,6 +21,7 @@ namespace ProductsSite
 
         public IActionResult OnGet()
         {
+            Product = new Product() { Id = Guid.NewGuid().ToString() };
             return Page();
         }
 

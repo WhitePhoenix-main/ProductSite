@@ -1,12 +1,13 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ProductsSite
 {
-    public class ProductsSiteContext : DbContext
+    public class ProductsSiteContext : IdentityDbContext<SiteUsers>
     {
         public ProductsSiteContext (DbContextOptions<ProductsSiteContext> options)
             : base(options)
@@ -14,5 +15,7 @@ namespace ProductsSite
         }
 
         public DbSet<ProductsSite.Product> Product { get; set; }
+        // Таблица для заказов
+        // Таблица Категорий
     }
 }

@@ -8,6 +8,7 @@ namespace ProductsSite
     }
     public class Normalizer : INormalizer
     {
+        // TODO: Выполнить проверку на числах с одним знаком после запятой/Переделать
          public int GetNormStrRu(string strToNorm)
         {
             string buffer = "";

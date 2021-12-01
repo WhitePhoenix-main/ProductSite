@@ -17,12 +17,31 @@ namespace ProductsSite
         {
             _context = context;
         }
-
+        
         public IList<Product> Product { get;set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string? search, string? productType)
         {
-            Product = await _context.Product.ToListAsync();
+            ViewData["search"] = search;
+            ViewData["productType"] = productType;
+            //TODO: Пересмотреть логику
+            var query = _context.Product.AsNoTracking();
+            if (!string.IsNullOrWhiteSpace(search) && string.IsNullOrWhiteSpace(productType))
+                query = query
+                    .Where(product => product.ProductType == search 
+                    || product.ProductName == search);
+            else if (!string.IsNullOrWhiteSpace(productType) && !string.IsNullOrWhiteSpace(search))
+                query = query
+                    .Where(product => product.ProductType == productType
+                                      || product.ProductName == search);
+            else if (!string.IsNullOrWhiteSpace(productType) )
+                query = query
+                    .Where(product => product.ProductType == productType);
+            
+            Product = await query
+                .OrderBy(product => product.ProductType)
+                .ThenBy(product => product.ProductName)
+                .ToListAsync();
         }
         
     }

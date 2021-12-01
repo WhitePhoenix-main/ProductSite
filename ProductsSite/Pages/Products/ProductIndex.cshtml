@@ -1,42 +1,49 @@
 @page
 @System.Globalization.CultureInfo.CurrentUICulture
-@using Microsoft.CodeAnalysis
 @model ProductsSite.ProductIndexModel
 @inject IProductsRepository _productsRepository
-<link rel="stylesheet" href="~/css/productsBox.css"/>
+@* <link rel="stylesheet" href="/css/productsBox.css" asp-append-version="true">  *@
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <p>
+        <a asp-page="/Products/ProductCreate">Create New</a>
+    </p>
+}
 
-<p>
-    <a asp-page="/Products/ProductCreate">Create New</a>
-</p>
-<thead>
-    </thead>
-    <tbody>
-    @foreach (var item in Model.Product)
-    {
-        var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
-        <div class="product-box">
-            <div class="product-inner">
-                <div class="product-wrap">
-                    <div class="pic">
-                        <img src="@_productsRepository.GetPic(item)"/>
+<tbody>
+<div class="container">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+        
+        
+        @foreach (var item in Model.Product)
+        {
+            var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+            <div class="product-box">
+                <div class="product-inner">
+                    <div class="product-wrap">
+                        <div class="pic">
+                            <img src="@_productsRepository.GetPic(item)"/>
                         </div>
-                    <div class="actions">
-                        <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a>
-                        <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a>
-                        <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
+                        <div class="actions">
+                            <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a>
+                            <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">
+                            <a href="">@item.ProductName</a>
+                        </h3>
+                        <span class="price">@priceOut ₽</span>
                     </div>
                 </div>
-                <div class="product-info">
-                    <h3 class="product-title"><a href="">@item.ProductName</a></h3>
-                    <span class="price">@priceOut ₽</span>
-                </div>
             </div>
-        </div>
-        
-    }
-    </tbody>
+        }
+    </div>
+</div>
+</tbody>

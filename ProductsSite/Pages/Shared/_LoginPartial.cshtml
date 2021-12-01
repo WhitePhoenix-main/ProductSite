@@ -1,12 +1,12 @@
 ﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<SiteUsers> SignInManager
+@inject UserManager<SiteUsers> UserManager
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @(User.Identity?.Name)!</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="Account/Manage/Index" title="Manage">Hello @(User.Identity?.Name)!</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new {area = ""})" method="post">
@@ -16,11 +16,8 @@
     }
     else
     {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
+        <div class="login-button">
+            <a class="text-dark" asp-area="Identity" asp-page="/Account/Login">Вход</a>
+        </div>
     }
 </ul>

@@ -1,0 +1,32 @@
+﻿@page
+@model Site.RolesEditModel
+@{
+    Layout = "_Layout";
+}
+<h1>Редактирование роли</h1>
+@if (Model.ModelState.ErrorCount > 0)
+{
+    <div class="alert alert-danger">
+        @Model.ModelState.First().Value.ToString()
+    </div>
+}
+<form method="post">
+    <input type="hidden" asp-for="Id">
+    <div>
+        <label>
+            Название роли:
+        </label>
+        <input asp-for="RoleName">
+    </div>
+    <div>
+        @if (string.IsNullOrWhiteSpace(Model.Id))
+        {
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        }
+        else
+        {
+            <button type="submit">Сохранить</button>
+        }
+        <a href="~/Admin/Roles/ListRoles">Вернуться в список</a>
+    </div>
+</form>

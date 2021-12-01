@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using ProductsSite;
 
 namespace ProductsSite
 {
+    [Authorize]
     public class ProductEditModel : PageModel, IHasProduct
     {
         private ProductsSite.ProductsSiteContext _context { get; init; }
@@ -27,10 +29,10 @@ namespace ProductsSite
             _productsRepository = productsRepository;
         }
 
-        [BindProperty] public Product? Product { get; set; }
+        [BindProperty] public Product Product { get; set; }
         public bool IsNewRec { get; set; } = false;
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string? id)
         {
             if (id == null)
             {
@@ -111,7 +113,7 @@ namespace ProductsSite
             return RedirectToPage("/Products/ProductIndex");
         }
 
-        private bool ProductExists(int id)
+        private bool ProductExists(string id)
         {
             return _context.Product.Any(e => e.Id == id);
         }

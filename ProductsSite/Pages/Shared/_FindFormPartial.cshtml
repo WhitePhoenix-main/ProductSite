@@ -1,0 +1,18 @@
+﻿@using Microsoft.EntityFrameworkCore
+@inject ProductsSiteContext _context
+@{
+    var search = (string?)ViewData["search"];
+    var productType = (string?)ViewData["productType"] ;
+    var productTypes = _context.Product.AsNoTracking()
+        .Select(x => x.ProductType)
+        .OrderBy(x => x)
+        .Distinct()
+        .Select(x => new SelectListItem(x, x, x == productType))
+        .ToList();
+    productTypes.Insert(0, new SelectListItem("Все категории", ""));
+}
+<form method="get" action="/Products/ProductIndex">
+    <select class="input-select" name="ProductType" asp-items="productTypes"></select>
+    <input class="input" placeholder="Поиск по сайту" name="search" value="@search"/>
+    <button type="submit" class="search-btn">Найти</button>
+</form>

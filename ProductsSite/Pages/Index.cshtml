@@ -1,10 +1,43 @@
 ﻿@page
+@using Microsoft.EntityFrameworkCore
 @model IndexModel
+@inject ProductsSiteContext _context
+<link rel="stylesheet" href="css/indexPage.css" asp-append-version="true">
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "EnixShop";
+}
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+    <h1> Привет @User.Identity.Name</h1>
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@{
+    var search = (string?)ViewData["search"];
+    var productType = (string?)ViewData["productType"];
+    var productTypes = _context.Product.AsNoTracking()
+        .Select(x => x.ProductType)
+        .OrderBy(x => x)
+        .Distinct()
+        .Select(x => new SelectListItem(x, x, x == productType))
+        .ToList();
+}
+<div class="row">
+<div class="col-md-3">
+    <div class="prod-select">
+        @foreach (var element in productTypes)
+        {
+            <p><a asp-page="/Products/ProductIndex" asp-route-productType="@element.Value">@element.Text</a></p>
+        }
+    </div>
+</div>
+    <div class="col-md-6">
+        <div class="news">
+            Новости
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="hot">
+            Скидки
+        </div>
+    </div>
 </div>
