@@ -23,7 +23,7 @@ namespace ProductsSite
         }
 
         [BindProperty]
-        public Product Product { get; set; }
+        public ProductRecord ProductRecord { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string? id)
         {
@@ -32,9 +32,9 @@ namespace ProductsSite
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+            ProductRecord = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Product == null)
+            if (ProductRecord == null)
             {
                 return NotFound();
             }
@@ -48,12 +48,12 @@ namespace ProductsSite
                 return NotFound();
             }
 
-            Product = await _context.Product.FindAsync(id);
+            ProductRecord = await _context.Product.FindAsync(id);
 
-            if (Product != null)
+            if (ProductRecord != null)
             {
-                _context.Product.Remove(Product);
-                _productsRepository.DelFolderWithFiles(_productsRepository.GetFolder(Product));
+                _context.Product.Remove(ProductRecord);
+                _productsRepository.DelFolderWithFiles(_productsRepository.GetFolder(ProductRecord));
                 await _context.SaveChangesAsync();
             }
             return RedirectToPage("/Products/ProductIndex");

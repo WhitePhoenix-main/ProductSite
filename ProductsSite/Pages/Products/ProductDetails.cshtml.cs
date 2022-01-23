@@ -18,7 +18,7 @@ namespace ProductsSite
             _context = context;
         }
 
-        public Product Product { get; set; }
+        public ProductRecord ProductRecord { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string? id)
         {
@@ -28,9 +28,9 @@ namespace ProductsSite
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+            ProductRecord = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Product == null)
+            if (ProductRecord == null)
             {
                 return NotFound();
             }

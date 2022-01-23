@@ -78,15 +78,39 @@
     padding: 0px;
     border-color: #FFFFFF;
     height: 40px;
+    line-height: 40px;
 }
-.cart-btn, .wishlist-btn, .login-btn{
+.cart-btn, .wishlist-btn{
     display: inline-block;
     text-align: center;
     width: 40px;
     height: 40px;
     margin-right: 10px;
+
     
 }
-.login-btn span{
-    padding-top: 110px;
+.login-btn {
+    padding: 15px;
+}
+.login-btn i{
+    margin-right: 10px;
+    font-size: 20px;
+    color: #FFFFFF;
+    
+}
+.btn-l1{
+    /*display: flex;*/
+    align-items: center;
+    background: none;
+    border-radius: 0.25rem;
+    width: 100px;
+    height: 40px;
+    border-color: #FFFFFF;
+    color: white;
+    text-align: center;
+    font-size: 15px;
+    justify-content: center;
+}
+.login-btn a{
+    text-decoration: none;
 }

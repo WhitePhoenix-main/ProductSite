@@ -14,8 +14,11 @@ namespace ProductsSite
         {
         }
 
-        public DbSet<ProductsSite.Product> Product { get; set; }
+        public DbSet<ProductRecord>? Product { get; set; }
+        
+        public DbSet<CategoryRecord>? Categories {get; set; }
         // Таблица для заказов
+        
         // Таблица Категорий
     }
 }

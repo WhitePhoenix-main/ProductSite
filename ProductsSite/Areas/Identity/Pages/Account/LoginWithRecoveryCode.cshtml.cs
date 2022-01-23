@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
-using ProductsSite;
 
 namespace ProductsSite.Areas.Identity.Pages.Account
 {
@@ -25,9 +22,9 @@ namespace ProductsSite.Areas.Identity.Pages.Account
         }
 
         [BindProperty]
-        public InputModel Input { get; set; }
+        public InputModel? Input { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
 
         public class InputModel
         {
@@ -35,10 +32,10 @@ namespace ProductsSite.Areas.Identity.Pages.Account
             [Required]
             [DataType(DataType.Text)]
             [Display(Name = "Recovery Code")]
-            public string RecoveryCode { get; set; }
+            public string? RecoveryCode { get; set; }
         }
 
-        public async Task<IActionResult> OnGetAsync(string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string? returnUrl = null)
         {
             // Ensure the user has gone through the username & password screen first
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -52,7 +49,7 @@ namespace ProductsSite.Areas.Identity.Pages.Account
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
@@ -65,24 +62,33 @@ namespace ProductsSite.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Unable to load two-factor authentication user.");
             }
 
-            var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
-
-            var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
-
-            if (result.Succeeded)
+            if (Input != null && Input.RecoveryCode is not null)
             {
-                _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code.", user.Id);
-                return LocalRedirect(returnUrl ?? Url.Content("~/"));
-            }
-            if (result.IsLockedOut)
-            {
-                _logger.LogWarning("User with ID '{UserId}' account locked out.", user.Id);
-                return RedirectToPage("./Lockout");
+                var recoveryCode = Input.RecoveryCode.Replace(" ", string.Empty);
+
+                var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User with ID '{UserId}' logged in with a recovery code", user.Id);
+                    return LocalRedirect(returnUrl ?? Url.Content("~/"));
+                }
+
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning("User with ID '{UserId}' account locked out", user.Id);
+                    return RedirectToPage("./Lockout");
+                }
+                else
+                {
+                    _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
+                    ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
+                    return Page();
+                }
             }
             else
             {
-                _logger.LogWarning("Invalid recovery code entered for user with ID '{UserId}' ", user.Id);
-                ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
+                //TODO: Тут нужно реализовать обработку ошибки
                 return Page();
             }
         }

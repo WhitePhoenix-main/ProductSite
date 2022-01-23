@@ -1,27 +1,13 @@
 ﻿<!DOCTYPE html>
 <html lang="ru">
-<partial name="_TopHeaderPartial"/>
-<partial name="_MainHeaderPartial"/>
-<partial name="_LoginPartial"/>
-<div>
-    <a href="~/Products/ProductIndex">lkjlkjl</a>
-</div>
-
-
-@*
-                <partial name="_LoginPartial"/>
-            </div>
-        </div>
-    </nav>
-</header>
-*@
-
+<partial name="Partials/_TopHeaderPartial"/>
+<partial name="Partials/_MainHeaderPartial"/>
+<partial name="Partials/_LoginPartial"/>
 <div class="container">
     <main role="main" class="pb-3">
         @RenderBody()
     </main>
 </div>
-
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/jquery-validation/dist/jquery.validate.globalize.min.js"></script>
 <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>

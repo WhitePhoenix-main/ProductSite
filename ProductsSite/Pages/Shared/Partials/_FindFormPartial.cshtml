@@ -4,7 +4,7 @@
     var search = (string?)ViewData["search"];
     var productType = (string?)ViewData["productType"] ;
     var productTypes = _context.Product.AsNoTracking()
-        .Select(x => x.ProductType)
+        .Select(x => x.CategoryId)
         .OrderBy(x => x)
         .Distinct()
         .Select(x => new SelectListItem(x, x, x == productType))

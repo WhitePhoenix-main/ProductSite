@@ -21,12 +21,12 @@ namespace ProductsSite
 
         public IActionResult OnGet()
         {
-            Product = new Product() { Id = Guid.NewGuid().ToString() };
+            ProductRecord = new ProductRecord() { Id = Guid.NewGuid().ToString() };
             return Page();
         }
 
         [BindProperty]
-        public Product Product { get; set; }
+        public ProductRecord ProductRecord { get; set; }
 
         public bool IsNewRec { get; set; } = true;
 
@@ -38,11 +38,11 @@ namespace ProductsSite
                 return Page();
             }
 
-            if (!String.IsNullOrWhiteSpace(Product.ProductTypeNew))
+            if (!String.IsNullOrWhiteSpace(ProductRecord.ProductTypeNew))
             {
-                Product.ProductType = Product.ProductTypeNew;
+                ProductRecord.CategoryId = ProductRecord.ProductTypeNew;
             }
-            _context.Product.Add(Product);
+            _context.Product.Add(ProductRecord);
             await _context.SaveChangesAsync();
             return RedirectToPage("/Products/ProductIndex");
         }

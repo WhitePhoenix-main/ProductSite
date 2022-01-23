@@ -684,10 +684,10 @@ E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Areas\Identity\Page
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Areas\Identity\Pages\_ViewStart.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Admin\Roles\ListRoles.cshtml.g.cs
-E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\_FindFormPartial.cshtml.g.cs
-E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\_LoginPartial.cshtml.g.cs
-E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\_MainHeaderPartial.cshtml.g.cs
-E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\_TopHeaderPartial.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\_ValidationScriptsPartial.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Admin\Roles\RolesEdit.cshtml.g.cs
+E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_FindFormPartial.cshtml.g.cs
+E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_LoginPartial.cshtml.g.cs
+E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_MainHeaderPartial.cshtml.g.cs
+E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_TopHeaderPartial.cshtml.g.cs

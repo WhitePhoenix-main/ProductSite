@@ -33,24 +33,24 @@
     </div>
     <div class="header">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-md-3">
                     <a href="/Index">
-                    <div class="logo">
-                        <span>EnixShop</span>
-                    </div>
+                        <div class="logo">
+                            <span>EnixShop</span>
+                        </div>
                     </a>
                 </div>
                 <div class="col-md-7">
                     <div class="header-search">
-                        <partial name="_FindFormPartial"/>
+                        <partial name="Partials/_FindFormPartial"/>
                     </div>
                 </div>
-
-                <div class="col-md-2">
-                    <div class="header-btn">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <div class="col-md-2">
                         <div class="cart-btn">
-                            <a asp-area="Identity" asp-page="Account/Login">
+                            <a asp-area="Identity" asp-page=#>
                                 <div>
                                     <i class="bi bi-person-circle"></i>
                                 </div>
@@ -65,38 +65,32 @@
                                 <div>текст</div>
                             </a>
                         </div>
-                    @if (User.Identity?.IsAuthenticated == false)
-                    {
-                        <div class="login-btn">
-                            <a asp-area="Identity" asp-page="Account/Login">
-                                <div>
-                                    <i class="bi bi-person-circle"></i>
-                                </div>
-                                <div>Вход</div>
-                            </a>
-                        </div>
-                    }
-                    @if (User.Identity?.IsAuthenticated == true)
-                    {
-                        <div class="login-btn">
-                            <a asp-area="Identity" asp-page="Account/Logout">
+                        <div class="logout-btn">
+                            <a asp-area="Identity" asp-page="/Account/Logout">
                                 <div>
                                     <i class="bi bi-person-circle"></i>
                                 </div>
                                 <div>Выход</div>
                             </a>
-                        </div> 
-                    }
-                    
-                     </div >
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-2 text-end">
+                        <a class="flex flex-nowrap btn btn-primary" asp-area="Identity" asp-page="/Account/Login">
+                            <span class="flex-grow-0">
+                                <i class="bi bi-person-circle"></i>
+                            </span>
+                            <span class="flex-grow-1">
+                                Войти
+                            </span>
+                        </a>
+                        
+                    </div>
+                }
 
-                    @*<a class="login-btn" asp-area="Identity" asp-page="Account/Login">
-                        <li>
-                            <i class="bi bi-person-circle"></i>
-                        </li>Войти
-                    </a>*@
-                </div>
-            </div>
+            </div >
         </div>
     </div>
 </head>

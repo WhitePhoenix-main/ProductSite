@@ -29,7 +29,7 @@ namespace ProductsSite
             _productsRepository = productsRepository;
         }
 
-        [BindProperty] public Product Product { get; set; }
+        [BindProperty] public ProductRecord ProductRecord { get; set; }
         public bool IsNewRec { get; set; } = false;
 
         public async Task<IActionResult> OnGetAsync(string? id)
@@ -39,9 +39,9 @@ namespace ProductsSite
                 return NotFound();
             }
 
-            Product = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
+            ProductRecord = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Product == null)
+            if (ProductRecord == null)
             {
                 return NotFound();
             }
@@ -55,28 +55,28 @@ namespace ProductsSite
         {
             //ModelState.AddModelError(nameof(Product.Price), "error message from controller");
 
-            if (Product == null)
+            if (ProductRecord == null)
             {
-                ModelState.AddModelError(nameof(Product), "error during input");
+                ModelState.AddModelError(nameof(ProductRecord), "error during input");
                 return Page();
             }
-            if (!String.IsNullOrWhiteSpace(Product.ProductTypeNew))
+            if (!String.IsNullOrWhiteSpace(ProductRecord.ProductTypeNew))
             {
-                Product.ProductType = Product.ProductTypeNew;
+                ProductRecord.CategoryId = ProductRecord.ProductTypeNew;
             }
 //            if (Product != null)
             {
-                if (Product.PriceInput != null)
+                if (ProductRecord.PriceInput != null)
                 {
-                    var norm = _normalizer.GetNormStrRu(Product.PriceInput);
+                    var norm = _normalizer.GetNormStrRu(ProductRecord.PriceInput);
 
                     if (norm == -1)
                     {
-                        ModelState.AddModelError(nameof(Product.Price), "error during input");
+                        ModelState.AddModelError(nameof(ProductRecord.Price), "error during input");
                     }
                     else
                     {
-                        Product.Price = norm;
+                        ProductRecord.Price = norm;
                     }
                     
                 }
@@ -84,7 +84,7 @@ namespace ProductsSite
                 var file = Request.Form.Files.FirstOrDefault();
                 if (file is not null && file.Length > 0)
                 {
-                    var result = await _productsRepository.SaveFileAsync(Product, file);
+                    var result = await _productsRepository.SaveFileAsync(ProductRecord, file);
                     
                 }
 
@@ -93,22 +93,22 @@ namespace ProductsSite
                     return Page();
                 }
 
-                var oldProduct = await _context.Set<Product>()
-                    .FirstOrDefaultAsync(x => x.Id == Product.Id);
+                var oldProduct = await _context.Set<ProductRecord>()
+                    .FirstOrDefaultAsync(x => x.Id == ProductRecord.Id);
                 if (oldProduct is null)
                 {
                     return NotFound();
                 }
 
-                oldProduct.ProductType = Product.ProductType;
-                oldProduct.Price = Product.Price;
-                oldProduct.ProductName = Product.ProductName;
-                oldProduct.ProductDate = Product.ProductDate;
+                oldProduct.CategoryId = ProductRecord.CategoryId;
+                oldProduct.Price = ProductRecord.Price;
+                oldProduct.ProductName = ProductRecord.ProductName;
+                oldProduct.ProductDate = ProductRecord.ProductDate;
                 // ......
                 _context.Update(oldProduct);
                 await _context.SaveChangesAsync();
             }
-            Console.WriteLine(Product.OnPreview);
+            Console.WriteLine(ProductRecord.OnPreview);
 
             return RedirectToPage("/Products/ProductIndex");
         }

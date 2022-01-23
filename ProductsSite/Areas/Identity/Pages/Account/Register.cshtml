@@ -44,8 +44,9 @@
                         </p>
                     </div>
                 }
-                else
+                else if (Model.ExternalLogins is not null)
                 {
+                    
                     <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <div>
                             <p>

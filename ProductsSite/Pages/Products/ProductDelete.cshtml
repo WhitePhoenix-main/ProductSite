@@ -13,27 +13,27 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Model.Product.ProductType
+            @Model.ProductRecord.CategoryId
         </dt>
         <dd class="col-sm-10">
-            @Model.Product.ProductType
+            @Model.ProductRecord.CategoryId
         </dd>
         <dt class="col-sm-2">
-            @Model.Product.ProductName
+            @Model.ProductRecord.ProductName
         </dt>
         <dd class="col-sm-10">
-            @Model.Product.ProductName
+            @Model.ProductRecord.ProductName
         </dd>
         <dt class="col-sm-2">
-            @Model.Product.Price
+            @Model.ProductRecord.Price
         </dt>
         <dd class="col-sm-10">
-            @Model.Product.Price
+            @Model.ProductRecord.Price
         </dd>
     </dl>
     
     <form method="post">
-        <input type="hidden" asp-for="Product.Id" />
+        <input type="hidden" asp-for="ProductRecord.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-page="/Products/ProductIndex">Back to List</a>
     </form>

@@ -18,7 +18,7 @@ namespace ProductsSite
             _context = context;
         }
         
-        public IList<Product> Product { get;set; }
+        public IList<ProductRecord> Product { get;set; }
 
         public async Task OnGetAsync(string? search, string? productType)
         {
@@ -28,18 +28,18 @@ namespace ProductsSite
             var query = _context.Product.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(search) && string.IsNullOrWhiteSpace(productType))
                 query = query
-                    .Where(product => product.ProductType == search 
+                    .Where(product => product.CategoryId == search 
                     || product.ProductName == search);
             else if (!string.IsNullOrWhiteSpace(productType) && !string.IsNullOrWhiteSpace(search))
                 query = query
-                    .Where(product => product.ProductType == productType
+                    .Where(product => product.CategoryId == productType
                                       || product.ProductName == search);
             else if (!string.IsNullOrWhiteSpace(productType) )
                 query = query
-                    .Where(product => product.ProductType == productType);
+                    .Where(product => product.CategoryId == productType);
             
             Product = await query
-                .OrderBy(product => product.ProductType)
+                .OrderBy(product => product.CategoryId)
                 .ThenBy(product => product.ProductName)
                 .ToListAsync();
         }

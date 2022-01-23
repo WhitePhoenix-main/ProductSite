@@ -5,12 +5,13 @@
 
     namespace ProductsSite
     {
-        public class Product
+        [Table("Product")]
+        public class ProductRecord
         {
-            [Key] public string Id { get; set; } = "";
+            [Key]/*[Column(TypeName ="nvarchar(150)")]*/ public string Id { get; set; } = "";
             //Категория ИД
-            public string? ProductType { get; set; }
-            public string ProductName { get; set; } = "";
+            [Column(TypeName = "nvarchar(150)")]public string? CategoryId { get; set; }
+            [Column(TypeName = "nvarchar(200)")]public string ProductName { get; set; } = "";
             
             public DateTime? ProductDate { get; set; }
             public int Price { get; set; }

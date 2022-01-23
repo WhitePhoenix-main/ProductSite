@@ -8,10 +8,10 @@ namespace ProductsSite
 {
     public interface IProductsRepository
     {
-        Task<(bool success, string? errorMessage)> SaveFileAsync(Product product, IFormFile formFile);
-        public string GetPic(Product product);
+        Task<(bool success, string? errorMessage)> SaveFileAsync(ProductRecord product, IFormFile formFile);
+        public string GetPic(ProductRecord product);
 
-        public string GetFolder(Product product);
+        public string GetFolder(ProductRecord product);
 
         public void DelFolderWithFiles(string path);
     }
@@ -25,17 +25,17 @@ namespace ProductsSite
 
         private IConfiguration _configuration { get; init; }
 
-        private string GetDir(Product product)
+        private string GetDir(ProductRecord product)
         {
             return Path.Combine(_configuration.GetSection("Storage").Value, product.Id.ToString());
         }
 
-        public string GetFolder(Product product)
+        public string GetFolder(ProductRecord product)
         {
             return GetDir(product);
         }
 
-        public string GetPic(Product product)
+        public string GetPic(ProductRecord product)
         {
             if (product.PreviewName is null)
             {
@@ -48,7 +48,7 @@ namespace ProductsSite
             }
         }
 
-        public async Task<(bool success, string? errorMessage)> SaveFileAsync(Product product, IFormFile formFile)
+        public async Task<(bool success, string? errorMessage)> SaveFileAsync(ProductRecord product, IFormFile formFile)
         {
             string prev = product.PreviewName;
             string dir = GetDir(product);
