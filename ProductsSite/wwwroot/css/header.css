@@ -13,7 +13,6 @@
 .header-links li {
     display: inline-block;
     margin-right: 15px;
-
 }
 
 .header-links li:last-child {
@@ -49,10 +48,9 @@
 .header-search form .input-select {
     margin-right: -4px;
     height: 40px;
-    border-radius: 40px 0px 0px 40px;
 }
 .header-search form .input {
-    width: calc(100% - 260px);
+    width: calc(100% - 230px);
     height: 40px;
     margin-right: -4px;
 }
@@ -63,54 +61,30 @@
     color: #FFF;
     font-weight: 700;
     border: none;
-    border-radius: 0px 40px 40px 0px;
 }
-.logo {
-    height: 80px;
-    padding-top: 5px;
-    background-color: #FFFFFF;
-    
-}
-
-.header-btn i{
-    font-size: 40px;
-    margin: 0;
-    padding: 0px;
-    border-color: #FFFFFF;
-    height: 40px;
-    line-height: 40px;
-}
-.cart-btn, .wishlist-btn{
-    display: inline-block;
-    text-align: center;
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-
-    
-}
-.login-btn {
-    padding: 15px;
-}
-.login-btn i{
-    margin-right: 10px;
-    font-size: 20px;
-    color: #FFFFFF;
-    
-}
-.btn-l1{
-    /*display: flex;*/
-    align-items: center;
-    background: none;
-    border-radius: 0.25rem;
-    width: 100px;
-    height: 40px;
-    border-color: #FFFFFF;
-    color: white;
-    text-align: center;
-    font-size: 15px;
-    justify-content: center;
-}
-.login-btn a{
+.header-btn a{
     text-decoration: none;
 }
+.header-btn{
+    position: inherit;
+}
+.header-btn a{
+    display: block;
+    height: inherit;
+}
+.compare-btn i, .wishlist-btn i, .cart-btn i, .notif-btn i, .logout-btn i{
+    font-size: 20px;
+    color: #FFFFFF;
+}
+.compare-btn, .wishlist-btn, .cart-btn, .notif-btn, .logout-btn{
+    display: inline-block;
+    text-align: center;
+    margin-right: 10px;
+}
+.notif-btn{
+}
+.compare-btn span, .wishlist-btn span, .cart-btn span{
+    color: #FFFFFF;
+}
+
+
