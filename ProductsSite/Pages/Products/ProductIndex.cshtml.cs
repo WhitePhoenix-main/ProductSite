@@ -11,11 +11,11 @@ namespace ProductsSite
 {
     public class ProductIndexModel : PageModel
     {
-        private readonly ProductsSite.ProductsSiteContext _context;
+        public  ProductsSite.ProductsSiteContext Context { get; }
 
         public ProductIndexModel(ProductsSite.ProductsSiteContext context)
         {
-            _context = context;
+            Context = context;
         }
         
         public IList<ProductRecord> Product { get;set; }
@@ -25,7 +25,7 @@ namespace ProductsSite
             ViewData["search"] = search;
             ViewData["productType"] = productType;
             //TODO: Пересмотреть логику
-            var query = _context.Product.AsNoTracking();
+            var query = Context.Product.AsNoTracking();
             if (!string.IsNullOrWhiteSpace(search) && string.IsNullOrWhiteSpace(productType))
                 query = query
                     .Where(product => product.CategoryId == search 
