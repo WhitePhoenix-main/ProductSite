@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ProductsSite.Pages.Wishlist.Data;
 
 namespace ProductsSite
 {
@@ -14,9 +15,17 @@ namespace ProductsSite
         {
         }
 
-        public DbSet<ProductRecord>? Product { get; set; }
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            builder.Entity<WishlistRecord>()
+                .HasKey(x => new { x.UserId, x.ProductId });
+        }
+
+        public DbSet<ProductRecord> Product { get; set; }
         
-        public DbSet<CategoryRecord>? Categories {get; set; }
+        public DbSet<CategoryRecord> Categories {get; set; }
+        
         // Таблица для заказов
         
         // Таблица Категорий

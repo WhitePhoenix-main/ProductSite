@@ -691,3 +691,4 @@ E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partia
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_LoginPartial.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_MainHeaderPartial.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_TopHeaderPartial.cshtml.g.cs
+E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Wishlist\Wishlist.cshtml.g.cs

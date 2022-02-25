@@ -1,19 +1,44 @@
 ﻿@page
-@model ProductsSite.Pages.Wishlist.WishListCreate
-
+@System.Globalization.CultureInfo.CurrentUICulture
+@model ProductsSite.WishlistModel
+@inject IProductsRepository _productsRepository
+@* <link rel="stylesheet" href="/css/productsBox.css" asp-append-version="true">  *@
 @{
-    Layout = null;
+    ViewData["Title"] = "Index";
 }
 
-<!DOCTYPE html>
+<h1>Wishlist</h1>
 
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-<div>
-    
+
+<tbody>
+<div class="container">
+    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+        
+        
+        @foreach (var item in Model.Products)
+        {
+            var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+            <div class="product-box">
+                <div class="product-inner">
+                    <div class="product-wrap">
+                        <div class="pic">
+                            <img src="@_productsRepository.GetPic(item)"/>
+                        </div>
+                        <div class="actions">
+                            <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a>
+                            <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a>
+                            <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">
+                            <a href="">@item.ProductName</a>
+                        </h3>
+                        <span class="price">@priceOut ₽</span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
-</body>
-</html>
+</tbody>

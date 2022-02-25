@@ -3,6 +3,7 @@
 @model ProductsSite.ProductIndexModel
 @inject IProductsRepository _productsRepository
 @* <link rel="stylesheet" href="/css/productsBox.css" asp-append-version="true">  *@
+<script src="/css/1.js" asp-append-version="true"></script>
 @{
     ViewData["Title"] = "Index";
 }
@@ -14,15 +15,41 @@
         <a asp-page="/Products/ProductCreate">Create New</a>
     </p>
 }
+<div class="row">
+    <div class="col-md-3">
+        <div>bcvbcvb</div>
+    </div>
+    <div class="col-md-9">
+        <div class="container">
+            <div class="row ">
+                <div class="cols-md-3 align-items-end">
+                    @foreach (var item in Model.Product)
+                    {
+                        var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+                        <div class="d-inline-block me-md-5 mb-md-5 card w-25">
+                            <div class="card-picture">
+                                <img class="img-fluid" src="@_productsRepository.GetPic(item)" alt="Card image cap">
+                                <div class="functional-buttons clearfix">
+                                    <div class="wishlist">
+                                        <i class="bi bi-heart" id="@item.Id" onclick="window.test1(this.id);"></i>
+                                    </div>
 
-<tbody>
-<div class="container">
-    <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
-        
-        
-        @foreach (var item in Model.Product)
-        {
-            var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">@item.ProductName</a>
+                                </div>
+                                <div class="text-center">
+                                    <p class="card-text">@priceOut ₽</p>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <a href="#" class="card-link">Card link</a>
+                                <a href="#" class="card-link">Another link</a>
+                            </div>
+                        </div>
+            @*var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
             <div class="product-box">
                 <div class="product-inner">
                     <div class="product-wrap">
@@ -42,8 +69,11 @@
                         <span class="price">@priceOut ₽</span>
                     </div>
                 </div>
+            </div>*@
+                    }
+                </div>
             </div>
-        }
+        </div>
+
     </div>
 </div>
-</tbody>

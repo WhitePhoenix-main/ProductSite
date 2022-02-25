@@ -12,9 +12,9 @@ namespace ProductsSite
 {
     public class ProductCreateModel : PageModel, IHasProduct
     {
-        private readonly ProductsSite.ProductsSiteContext _context;
+        private ProductsSiteContext _context { get; }
 
-        public ProductCreateModel(ProductsSite.ProductsSiteContext context)
+        public ProductCreateModel(ProductsSiteContext context)
         {
             _context = context;
         }
