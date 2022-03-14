@@ -5,7 +5,8 @@
 @inject IProductsRepository _productsRepository
 @* <link rel="stylesheet" href="/css/productsBox.css" asp-append-version="true">  *@
 <script src="/css/1.js" asp-append-version="true"></script>
-<script>
+<link rel="stylesheet" href="/css/ProductInd.css" asp-append-version="true">
+@*<script>
 function toggleWish(el) {
     console.log(el);
     var id = el.dataset.productId;
@@ -17,16 +18,16 @@ axios({
   }
 });
 }
-</script>
+</script>*@
 @inject UserManager<SiteUsers> _manager
-@{
+@*@{
     ViewData["Title"] = "Index";
-    var dbContext = Model.Context;
+    /*var dbContext = Model.Context;*/
     var userId = "";
     if (User.Identity.IsAuthenticated)
         userId = (await _manager.FindByNameAsync(User.Identity!.Name))?.Id;
     
-}
+}*@
 
 <h1>Index</h1>
 @if (User.Identity?.IsAuthenticated ?? false)
@@ -35,44 +36,58 @@ axios({
         <a asp-page="/Products/ProductCreate">Create New</a>
     </p>
 }
-
 <div class="row">
     <div class="col-md-3">
         <div>bcvbcvb</div>
     </div>
     <div class="col-md-9">
-        <div >
-            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
-                    @foreach (var item in Model.Product)
-                    {
-                        var isInWish = dbContext.Set<WishlistRecord>()
-                            .Any(x => x.ProductId == item.Id && x.UserId == userId);
-                        var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
-                        <div class="@(isInWish? "in-wish":"")" data-product-id="@item.Id">
-                        <div class="card mb-3">
-                            <div class="card-picture">
-                                <img class="img-fluid" src="@_productsRepository.GetPic(item)" alt="Card image cap">
-                                <div class="functional-buttons clearfix">
-                                    <div class="wishlist">
-                                        <i class="bi bi-heart"
-                                           onclick="window.test1(this);"></i>
-                                    </div>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
+            @foreach (var item in Model.Product)
+            {
+                /*var isInWish = dbContext.Set<WishlistRecord>()
+                            .Any(x => x.ProductId == item.Id && x.UserId == userId);*/
+                var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+                <div>
+                    <div class="card mb-3">
+                        <div class="card-picture position-relative">
+                            <img class="img-fluid" src="@_productsRepository.GetPic(item)" alt="Card image cap"/>
+                            <div class="btns">
+                                <div class="wishlist container-fluid">
+                                    <i class="bi bi-heart"
+                                       onclick="window.test1(this);">
+                                    </i>
+                                </div>
+                                <div class="cart">
+                                    <i class="bi bi-heart"
+                                       onclick="window.test1(this);">
+                                    </i>
+                                </div>
+                                <div class="info">
+                                    <i class="bi bi-heart"
+                                       onclick="window.test1(this);">
+                                    </i>
+                                </div>
+                            </div>
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="settings">
+                                    <a asp-page="/Products/ProductPictureEdit" asp-route-id="@item.Id">
+                                        <i class="bi bi-image"></i>
+                                    </a>
+                                </div>
+                            }
 
-                                </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">@item.ProductName</a>
                             </div>
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">@item.ProductName</a>
-                                </div>
-                                <div class="text-center">
-                                    <p class="card-text">@priceOut ₽</p>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <a href="#" class="card-link">Card link</a>
-                                <a href="#" class="card-link">Another link</a>
+                            <div class="text-center">
+                                <p class="card-text">@priceOut ₽</p>
                             </div>
                         </div>
+                    </div>
+                </div>
             @*var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
             <div class="product-box">
                 <div class="product-inner">
@@ -94,9 +109,7 @@ axios({
                     </div>
                 </div>
             </div>*@
-                </div>
-                    }
-            </div>
+            }
         </div>
 
     </div>

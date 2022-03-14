@@ -69,7 +69,7 @@ namespace ProductsSite
                 if (ProductRecord.PriceInput != null)
                 {
                     var norm = _normalizer.GetNormStrRu(ProductRecord.PriceInput);
-
+    
                     if (norm == -1)
                     {
                         ModelState.AddModelError(nameof(ProductRecord.Price), "error during input");
@@ -80,8 +80,8 @@ namespace ProductsSite
                     }
                     
                 }
-                
                 var file = Request.Form.Files.FirstOrDefault();
+                Console.WriteLine((file is not null) + "file");
                 if (file is not null && file.Length > 0)
                 {
                     var result = await _productsRepository.SaveFileAsync(ProductRecord, file);
@@ -100,10 +100,13 @@ namespace ProductsSite
                     return NotFound();
                 }
 
-                oldProduct.CategoryId = ProductRecord.CategoryId;
+                if (ProductRecord.CategoryId is not null)
+                {
+                    oldProduct.CategoryId = ProductRecord.CategoryId;
+                }
                 oldProduct.Price = ProductRecord.Price;
                 oldProduct.ProductName = ProductRecord.ProductName;
-                oldProduct.ProductDate = ProductRecord.ProductDate;
+                oldProduct.PreviewName = ProductRecord.PreviewName;
                 // ......
                 _context.Update(oldProduct);
                 await _context.SaveChangesAsync();

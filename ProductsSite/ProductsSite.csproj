@@ -1,9 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
-        <TargetFramework>net5.0</TargetFramework>
+        <TargetFramework>net6.0-windows</TargetFramework>
         <Nullable>enable</Nullable>
         <UserSecretsId>aspnet-ProductsSite-71CB8933-44D0-4F75-B4D6-60135121A116</UserSecretsId>
+        <LangVersion>9</LangVersion>
     </PropertyGroup>
     
     <ItemGroup>

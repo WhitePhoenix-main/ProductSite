@@ -47,17 +47,16 @@ namespace ProductsSite
                 return path.Substring(path.IndexOf("\\pics"));
             }
         }
-
         public async Task<(bool success, string? errorMessage)> SaveFileAsync(ProductRecord product, IFormFile formFile)
         {
-            string prev = product.PreviewName;
+            string? prev = product.PreviewName;
             string dir = GetDir(product);
             if (!System.IO.Directory.Exists(dir))
             {
                 Directory.CreateDirectory(dir);
             }
-
             string fileName = Path.GetFileName(formFile.FileName);
+            Console.WriteLine("Path.GetFileName(formFile.FileName)");
             if (string.IsNullOrWhiteSpace(fileName))
                 fileName = "picture.png";
             string path = Path.Combine(dir, fileName);
@@ -65,7 +64,6 @@ namespace ProductsSite
             {
                 System.IO.File.Delete(path);
             }
-
             await using var stream = System.IO.File.Open(path, FileMode.CreateNew);
             await formFile.CopyToAsync(stream);
             stream.Close();

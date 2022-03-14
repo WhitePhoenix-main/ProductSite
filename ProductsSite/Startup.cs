@@ -28,15 +28,13 @@ namespace ProductsSite
         public void ConfigureServices(IServiceCollection services)
         {
             services
-            .AddControllersWithViews()
+                .AddControllersWithViews()
             .AddRazorRuntimeCompilation();
             
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddIdentity<SiteUsers, IdentityRole>(
-
-  
-                    options => 
-                    options.SignIn.RequireConfirmedAccount = true)
+                    options =>
+                        options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ProductsSiteContext>();
             //     options)    =>
             //     {

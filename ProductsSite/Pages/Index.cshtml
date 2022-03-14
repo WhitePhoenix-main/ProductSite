@@ -2,12 +2,11 @@
 @using Microsoft.EntityFrameworkCore
 @model IndexModel
 @inject ProductsSiteContext _context
-<link rel="stylesheet" href="css/indexPage.css" asp-append-version="true">
+
 <link rel="stylesheet" href="css/mainPage.css" asp-append-version="true">
 @{
     ViewData["Title"] = "EnixShop";
 }
-
 @{
     var search = (string?)ViewData["search"];
     var productType = (string?)ViewData["productType"];
@@ -27,14 +26,13 @@
                     <i class="bi bi-list"></i>
                     Категории
                 </h4>
-                <ul class="categories-list">
+                <ul class="categories-list mb-0">
                     @foreach (var element in productTypes)
                     {
                         <li>
                             <a class="category-link" asp-page="/Products/ProductIndex" asp-route-productType="@element.Value">
                                 <i class="bi bi-box"></i>
                                 @element.Text
-                                @_context.
                             </a>
                         </li>
                     }
@@ -42,7 +40,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <div class="news">
+            <div class="news shadow">
                 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -74,6 +72,15 @@
                     </button>
                 </div>
             </div>
+        </div>
+        <div class="col-md-9">
+            @{
+                var product = (string?)ViewData["IsHotDeal"];
+                var products = _context.Product.AsNoTracking()
+                    .Where(x => x.IsHotDeal == true)
+                    .OrderBy(x => x.ProductName)
+                    .ToList();
+            }
         </div>
     </div>
 </div>

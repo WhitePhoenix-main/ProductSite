@@ -1,14 +1,13 @@
 @page
+@using Microsoft.EntityFrameworkCore
 @model ProductsSite.ProductEditModel
-
+@inject ProductsSite.ProductsSiteContext _context
+<link rel="stylesheet" href="/css/ProductEditPage.css" asp-append-version="true">
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Product</h4>
-<hr />
+<h1>Редактирование карточки товара</h1>
 @if (!Model.ModelState.IsValid)
 {
     foreach (var state in (Model.ModelState.Values))
@@ -20,15 +19,59 @@
     }
 }
 <div class="row">
-    <div class="col-md-4">
-        <partial name="Products/Partial/ProductForm"/>
+    <div class="col-md-3 p-2">
+        <div class="main-edit shadow">
+            <div class="title-block p-1">
+                <i class="bi bi-gear ms-1"></i>
+                <span>Основные</span>
+            </div>
+            <div class="category-settings m-2">
+                <form method="post">
+                    <input type="hidden" asp-for="ProductRecord.Id"/>
+                    <div class="form-group">
+                        <label asp-for="ProductRecord.ProductName" class="control-label"></label>
+                        <input asp-for="ProductRecord.ProductName" class="form-control"/>
+                        <span asp-validation-for="ProductRecord.ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductRecord.PriceInput" class="control-label"></label>
+                        <input asp-for="ProductRecord.PriceInput" class="form-control"/>
+                        <span asp-validation-for="ProductRecord.PriceInput" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
+    <div class="col-md-3 p-2">
+        <div class="category-edit shadow">
+            <div class="title-block p-1">
+                <i class="bi bi-list"></i>
+                <span>Категория</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 p-2">
+        <div class="picture-edit shadow">
+            <div class="title-block p-1">
+                <i class="bi bi-list"></i>
+                <span>Изображения</span>
+            </div>
+            <form enctype="multipart/form-data" method="post">
+            <partial name="Products/Partial/ProductForm"/>
+            </form>
+        </div>
+    </div>
+
 </div>
 
 <div>
     <a asp-page="/Products/ProductIndex">Back to List</a>
 </div>
+<link rel="stylesheet" href="css/ProductEdit.css" asp-append-version="true">
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

@@ -192,7 +192,6 @@ E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.deps.json
 E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.runtimeconfig.json
 E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.runtimeconfig.dev.json
 E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.dll
-E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ref\ProductsSite.dll
 E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.pdb
 E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.Views.dll
 E:\Solutions\ProductSite\ProductsSite\bin\Debug\net5.0\ProductsSite.Views.pdb
@@ -692,3 +691,4 @@ E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partia
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_MainHeaderPartial.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Shared\Partials\_TopHeaderPartial.cshtml.g.cs
 E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\Razor\Pages\Wishlist\Wishlist.cshtml.g.cs
+E:\Solutions\ProductSite\ProductsSite\obj\Debug\net5.0\refint\ProductsSite.dll

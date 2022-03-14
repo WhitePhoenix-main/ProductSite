@@ -185,18 +185,20 @@ namespace ProductsSite.Migrations
                     b.Property<string>("CategoryId")
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<bool>("IsHotDeal")
+                        .HasColumnType("bit");
+
                     b.Property<string>("PreviewName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("ProductDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("ProductName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

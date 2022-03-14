@@ -1,3 +1,45 @@
 ﻿.active{
     background-color: red;
 }
+.btns{
+    position: absolute;
+    bottom: 10px;
+    display: none;
+    justify-content: space-around;
+    width: 100%;
+    line-height: unset;
+}
+.card:hover .btns{
+    display: flex;
+}
+.card-picture .wishlist i{
+    background-color: #0b5ed7;
+}
+.card-picture .cart i{
+    background-color: #0b5ed7;
+}
+.card-picture .info i{
+    background-color: #0b5ed7;
+}
+.card-picture .settings * {
+    line-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-picture .settings {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    padding: 4px;
+    background-color: #1E1F29;
+    overflow: hidden;
+}
+.card-picture .settings i{
+    font-size: 24px;
+    color: white;
+    display: block;
+}
