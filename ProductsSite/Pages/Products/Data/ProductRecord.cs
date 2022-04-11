@@ -19,6 +19,9 @@
             
             public bool IsHotDeal { get; set; }
             
+            public int DiscountPercent { get; set; }
+            
+            public bool IsDiscount { get; set; }
 // Наличие Товара
             [NotMapped] public bool OnPreview { get; set; }
             [NotMapped] public string? PriceInput { get; set; }

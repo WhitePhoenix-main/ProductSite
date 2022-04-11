@@ -1,117 +1,125 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ProductsSite;
 
 namespace ProductsSite
 {
     [Authorize]
     public class ProductPictureEditModel : PageModel, IHasProduct
     {
-        private ProductsSite.ProductsSiteContext _context { get; init; }
-        private INormalizer _normalizer { get; init; }
-
-        private IProductsRepository _productsRepository { get; init; }
-
-        public ProductPictureEditModel(ProductsSite.ProductsSiteContext context, INormalizer normalizer,
+        public ProductPictureEditModel(ProductsSiteContext context, INormalizer normalizer,
             IProductsRepository productsRepository)
         {
             _context = context;
             _normalizer = normalizer;
             _productsRepository = productsRepository;
         }
+        private ProductsSiteContext _context { get; init; }
+        private INormalizer _normalizer { get; init; }
 
-        [BindProperty] public ProductRecord ProductRecord { get; set; }
-        public bool IsNewRec { get; set; } = false;
+        private IProductsRepository _productsRepository { get; init; }
 
-        public async Task<IActionResult> OnGetAsync(string? id)
+        public ProductRecord? ProductRecord { get; set; }
+        public bool IsNewRec { get; set; }
+
+        [BindProperty] public string? ProductId { get; set; }
+        [BindProperty] public bool OnPreview { get; set; }
+        
+        [BindProperty] public string? FileName { get; set; }
+        public async Task<IActionResult> OnGetAsync(string id)
         {
-            if (id == null)
+            if (string.IsNullOrWhiteSpace(id))
             {
-                return NotFound();
-            }
-
+                return BadRequest();
+            } 
             ProductRecord = await _context.Product.FirstOrDefaultAsync(m => m.Id == id);
-
             if (ProductRecord == null)
             {
                 return NotFound();
             }
-
+            ProductId = id;
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostSetPreviewAsync()
         {
-            //ModelState.AddModelError(nameof(Product.Price), "error message from controller");
-
-            if (ProductRecord == null)
+            //TODO: Вынести в методы
+            if (string.IsNullOrWhiteSpace(ProductId))
             {
-                ModelState.AddModelError(nameof(ProductRecord), "error during input");
-                return Page();
+                return BadRequest();
+            }
+            
+            if (string.IsNullOrWhiteSpace(FileName))
+            {
+                return BadRequest();
             }
 
-            if (!String.IsNullOrWhiteSpace(ProductRecord.ProductTypeNew))
-            {
-                ProductRecord.CategoryId = ProductRecord.ProductTypeNew;
-            }
-
-            if (ProductRecord.PriceInput != null)
-            {
-                var norm = _normalizer.GetNormStrRu(ProductRecord.PriceInput);
-
-                if (norm == -1)
-                {
-                    ModelState.AddModelError(nameof(ProductRecord.Price), "error during input");
-                }
-                else
-                {
-                    ProductRecord.Price = norm;
-                }
-            }
-
-            var file = Request.Form.Files.FirstOrDefault();
-
-            if (file is not null && file.Length > 0)
-            {
-                var result = await _productsRepository.SaveFileAsync(ProductRecord, file);
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var oldProduct = await _context.Set<ProductRecord>()
-                .FirstOrDefaultAsync(x => x.Id == ProductRecord.Id);
-            if (oldProduct is null)
+            ProductRecord = await _context.Set<ProductRecord>()
+                .FirstOrDefaultAsync(x => x.Id == ProductId);
+            if (ProductRecord is null)
             {
                 return NotFound();
             }
-            Console.WriteLine(!String.IsNullOrWhiteSpace(ProductRecord.ProductName));
-            Console.WriteLine(!String.IsNullOrWhiteSpace("ProductRecord.ProductName"));
-            if (!String.IsNullOrWhiteSpace(ProductRecord.ProductName))
-            {
-                oldProduct.ProductName = ProductRecord.ProductName;
-            }
-            _context.Update(oldProduct);
+            
+            ProductRecord.PreviewName = FileName;
             await _context.SaveChangesAsync();
-
-            Console.WriteLine(ProductRecord.OnPreview);
-
-            return RedirectToPage("/Products/ProductIndex");
+            return Page();
         }
 
+        public async Task<IActionResult> OnPostDeleteImageAsync()
+        {
+            if (string.IsNullOrWhiteSpace(ProductId))
+            {
+                return BadRequest();
+            }
+            if (string.IsNullOrWhiteSpace(FileName))
+            {
+                return BadRequest();
+            }
+            ProductRecord = await _context.Set<ProductRecord>()
+                .FirstOrDefaultAsync(x => x.Id == ProductId);
+            if (ProductRecord is null)
+            {
+                return NotFound();
+            } 
+            var s = _productsRepository.GetFolder(ProductRecord);
+            if (FileName == ProductRecord.PreviewName)
+            {
+                ProductRecord.PreviewName = null;
+            }
+            System.IO.File.Delete($"{s}\\{FileName}");
+            await _context.SaveChangesAsync();
+            return Page();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            //ModelState.AddModelError(nameof(Product.Price), "error message from controller");
+            if (string.IsNullOrWhiteSpace(ProductId))
+            {
+                return BadRequest();
+            }
+
+            var productPreview = Request.Form.Files.FirstOrDefault(); 
+            
+            if (productPreview is null || productPreview.Length == 0)
+            {
+                return BadRequest();
+            }
+            ProductRecord = await _context.Set<ProductRecord>()
+                .FirstOrDefaultAsync(x => x.Id == ProductId);
+            if (ProductRecord is null)
+            {
+                return NotFound();
+            }
+
+            await _productsRepository.SaveFileAsync(ProductRecord, productPreview);
+            await _context.SaveChangesAsync();
+
+                return Page();
+        }
         private bool ProductExists(string id)
         {
             return _context.Product.Any(e => e.Id == id);

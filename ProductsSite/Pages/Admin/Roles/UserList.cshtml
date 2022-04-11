@@ -1,0 +1,11 @@
+﻿@page "/Admin/UserList"
+@model ProductsSite.UserList
+
+<div>
+    @foreach (var user in Model.AllUsers)
+    {
+        <div>
+            <a href="/admin/userroles?userId=@user.Id">@user.UserName</a>
+        </div>
+    }
+</div>

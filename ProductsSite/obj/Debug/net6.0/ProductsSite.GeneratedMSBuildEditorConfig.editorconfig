@@ -11,9 +11,33 @@ build_property.RootNamespace = ProductsSite
 build_property.ProjectDir = E:\Solutions\ProductSite\ProductsSite\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
 build_property.MSBuildProjectDirectory = E:\Solutions\ProductSite\ProductsSite
 build_property._RazorSourceGeneratorDebug = 
+
+[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/Roles/RoleEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXNcUm9sZUVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/Roles/RolesIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXNcUm9sZXNJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/Roles/UserList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXNcVXNlckxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/Roles/UserRoles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = 
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXNcVXNlclJvbGVzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Solutions/ProductSite/ProductsSite/Areas/Identity/Pages/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
@@ -167,12 +191,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/Roles/ListRoles.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXNcTGlzdFJvbGVzLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/Roles/RolesEdit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXNcUm9sZXNFZGl0LmNzaHRtbA==
+[E:/Solutions/ProductSite/ProductsSite/Pages/Admin/AdminCabinet/AdminCabinetIndex.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cQWRtaW5DYWJpbmV0XEFkbWluQ2FiaW5ldEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Solutions/ProductSite/ProductsSite/Pages/Error.cshtml]
@@ -207,6 +227,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcUHJvZHVjdEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[E:/Solutions/ProductSite/ProductsSite/Pages/Products/ProductPictureEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJvZHVjdHNcUHJvZHVjdFBpY3R1cmVFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [E:/Solutions/ProductSite/ProductsSite/Pages/Shared/Partials/_FindFormPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXFBhcnRpYWxzXF9GaW5kRm9ybVBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -219,8 +243,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXFBhcnRpYWxzXF9NYWluSGVhZGVyUGFydGlhbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/Solutions/ProductSite/ProductsSite/Pages/Shared/Partials/_TopHeaderPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXFBhcnRpYWxzXF9Ub3BIZWFkZXJQYXJ0aWFsLmNzaHRtbA==
+[E:/Solutions/ProductSite/ProductsSite/Pages/Shared/Partials/_RolesPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXFBhcnRpYWxzXF9Sb2xlc1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/Solutions/ProductSite/ProductsSite/Pages/Shared/Partials/_UpInfoPanelPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXFBhcnRpYWxzXF9VcEluZm9QYW5lbFBhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/Solutions/ProductSite/ProductsSite/Pages/Shared/_Layout.cshtml]

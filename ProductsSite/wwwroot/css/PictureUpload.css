@@ -1,0 +1,27 @@
+﻿.title-block {
+    background-color: #1E1F29;
+    color: #FFFFFF;
+    padding: 15px 20px 15px 20px;
+    font-size: 18px
+}
+
+.picture-block {
+    aspect-ratio: 1/1;
+    position: relative;
+}
+.picture-block img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+.del-pic-btn{
+    border: 0;
+    background: 0;
+}
+.del-pic-btn i{
+    color: red;
+    font-size: 20px;
+}

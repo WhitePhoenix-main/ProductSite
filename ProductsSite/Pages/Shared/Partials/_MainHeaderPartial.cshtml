@@ -1,51 +1,66 @@
 ﻿@inject ProductsSiteContext _context
-<head>
-    <div class="top-header">
-        <div class="container">
-            <div class="row">
-                <ul class="header-links col-4">
-                    <li>
-                        <a href="#"> <i class="bi bi-geo-alt"></i>Иркутск</a>
-                    </li>
-                </ul>
-                <ul class="header-links col-5">
-                    <li>
-                        <a href="#">Магазины</a>
-                    </li>
-                    <li>
-                        <a href="#">Покупателям</a>
-                    </li>
-                    <li>
-                        <a href="#">Юридическим лицам</a>
-                    </li>
-                    <li>
-                        <a href="#">Club</a>
-                    </li>
-                </ul>
-                <ul class="header-links col-3">
-                    <li>
-                        <a href="#"><i class="bi bi-telephone"></i> 8-800-88-88-888</a>
-                        <span id="header-work-time">(c 08:00 до 03:00)</span>
-                    </li>
-                </ul>
+<div class="header">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-2">
+                <a href="/Index">
+                    <img class="logo" src="~/pics/emblem.png">
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="header">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-2">
-                    <a href="/Index">
-                        <img class="logo" src="~/pics/emblem.png">
-                    </a>
+            <div class="col-md-5">
+                <div class="header-search">
+                    <partial name="Partials/_FindFormPartial"/>
                 </div>
-                <div class="col-md-5">
-                    <div class="header-search">
-                        <partial name="Partials/_FindFormPartial"/>
+            </div>
+            <div class="header-btn col-md-5 d-flex">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <div class="container justify-content-between p-0">
+                        <div class="compare-btn">
+                            <a asp-area="Identity" asp-page="#">
+                                <div class="header-icons">
+                                    <i class="bi bi-bar-chart"></i>
+                                </div>
+                                <span>Сравнить</span>
+                            </a>
+                        </div>
+                        <div class="wishlist-btn">
+                            <a asp-area="Identity" asp-page="Account/Login">
+                                <div class="header-icons">
+                                    <i class="bi bi-heart"></i>
+                                </div>
+                                <span>Избранное</span>
+                            </a>
+                        </div>
+                        <div class="cart-btn">
+                            <a asp-area="Identity" asp-page="#">
+                                <div class="header-icons">
+                                    <i class="bi bi-cart3"></i>
+                                </div>
+                                <span>Корзина</span>
+                            </a>
+                        </div>
+                        <div class="notif-btn text-white text-lg">
+                            <a asp-area="Identity" asp-page="#">
+                                <div>
+                                    <i class="bi bi-bell"></i>
+                                </div>
+                                <span>Уведомления</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="header-btn col-md-3">
-                    <div class="text-start flex-grow-1">
+                    <div class="logout-btn">
+                        <a asp-area="Identity" asp-page="/Account/Logout">
+                            <div>
+                                <i class="bi bi-person-circle"></i>
+                            </div>
+                            <span>Выход</span>
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="container justify-content-between p-0">
                         <div class="compare-btn">
                             <a asp-area="Identity" asp-page="#">
                                 <div class="header-icons">
@@ -71,40 +86,15 @@
                             </a>
                         </div>
                     </div>
-
-                </div>
-                <div class="header-btn col-md-2">
-                    @if (User.Identity?.IsAuthenticated ?? false)
-                    {
-                        <div class="text-white text-lg">
-                            <a asp-area="Identity" asp-page="#">
-                                <div>
-                                    <i class="bi bi-bell"></i>
-                                </div>
-                                <span></span>
-                            </a>
-                        </div>
-                        <div class="logout-btn">
-                            <a asp-area="Identity" asp-page="/Account/Logout">
-                                <div>
-                                    <i class="bi bi-person-circle"></i>
-                                </div>
-                                <span>Выход</span>
-                            </a>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="text-end">
-                            <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Login">
-                                <span>
-                                    Войти
-                                </span>
-                            </a>
-                        </div>
-                    }
-                </div>
+                    <div class="text-end align-self-center">
+                        <a class="btn login-btn" asp-area="Identity" asp-page="/Account/Login">
+                            <span>
+                                Войти
+                            </span>
+                        </a>
+                    </div>
+                }
             </div>
         </div>
-    </div >
-</head>
+    </div>
+</div>

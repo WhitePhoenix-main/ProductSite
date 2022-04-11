@@ -43,3 +43,21 @@
     color: white;
     display: block;
 }
+.picture-block {
+    aspect-ratio: 1/1;
+    position: relative;
+}
+.picture-block img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+}
+.text1{
+    height: 1.4em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

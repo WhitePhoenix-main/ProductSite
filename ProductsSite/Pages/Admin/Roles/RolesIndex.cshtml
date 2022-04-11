@@ -1,0 +1,37 @@
+﻿@page "/Admin/RolesIndex"
+@model ProductsSite.RolesIndex
+@inject RoleManager<IdentityRole> _roleManager
+@{
+    Layout = "_Layout";
+    var allRoles = _roleManager.Roles.ToList();
+}
+<div>
+     
+    <h2>Список ролей</h2>
+    <table class="table">
+        @foreach (var role in allRoles)
+        {
+            <tr>
+                <td>
+                    <a asp-page="/Admin/Roles/RolesEdit" asp-route-id="@role.Id">@role.Name</a>
+                </td>
+                <td>
+                    <form method="post"
+                          asp-page="/Admin/Roles/RolesEdit"
+                          asp-page-handler="Delete"
+                          asp-route-id="@role.Id">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Удалить
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    Тут будут юзеры
+                </td>
+            </tr>
+        }
+    </table>
+    <a asp-page="/Admin/Roles/RolesEdit" asp-page-handler="Add">Добавить роль</a>
+    @*<a asp-="Create">Добавить роль</a>
+    <a asp-action="UserList">Список пользователей</a>*@
+</div>

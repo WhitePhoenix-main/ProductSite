@@ -41,15 +41,15 @@
         <span asp-validation-for="ProductRecord.ProductName" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="ProductRecord.PriceInput" class="control-label"></label>
-        <input asp-for="ProductRecord.PriceInput" class="form-control"/>
-        <span asp-validation-for="ProductRecord.PriceInput" class="text-danger"></span>
+        <label asp-for="ProductRecord.Price" class="control-label"></label>
+        <input asp-for="ProductRecord.Price" class="form-control"/>
+        <span asp-validation-for="ProductRecord.Price" class="text-danger"></span>
     </div>
     <div class="form-group">
-                        <label asp-for="ProductRecord.ProductSearch" class="control-label"></label>
-                        <input asp-for="ProductRecord.ProductSearch" class="form-control"/>
-                        <span asp-validation-for="ProductRecord.ProductSearch" class="text-danger"></span>
-                        </div>
+        <label asp-for="ProductRecord.ProductSearch" class="control-label"></label>
+        <input asp-for="ProductRecord.ProductSearch" class="form-control"/>
+        <span asp-validation-for="ProductRecord.ProductSearch" class="text-danger"></span>
+        </div>
     @if (!Model.IsNewRec)
     {
         <dl>

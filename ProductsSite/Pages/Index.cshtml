@@ -2,8 +2,10 @@
 @using Microsoft.EntityFrameworkCore
 @model IndexModel
 @inject ProductsSiteContext _context
+@inject IProductsRepository _productsRepository
 
 <link rel="stylesheet" href="css/mainPage.css" asp-append-version="true">
+<link rel="stylesheet" href="css/ProductInd.css" asp-append-version="true"/>
 @{
     ViewData["Title"] = "EnixShop";
 }
@@ -72,15 +74,86 @@
                     </button>
                 </div>
             </div>
-        </div>
-        <div class="col-md-9">
-            @{
-                var product = (string?)ViewData["IsHotDeal"];
-                var products = _context.Product.AsNoTracking()
-                    .Where(x => x.IsHotDeal == true)
-                    .OrderBy(x => x.ProductName)
-                    .ToList();
-            }
+            <div class="hot-products shadow p-0">
+                <div class="title-block mt-2">
+                    <span>Популярные товары</span>
+                </div>
+                @{
+                    var product = (string?)ViewData["IsHotDeal"];
+                    var products = _context.Product.AsNoTracking()
+                        .Where(product => product.IsHotDeal == true)
+                        .OrderBy(product => product.Id)
+                        .Distinct()
+                        .ToList();
+                }
+                <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 justify-content-around">
+                    @{
+                        foreach (var item in products)
+                        {
+                            var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
+                            <div>
+                                <div class="card mb-3">
+                                    <div class="wrapper card-picture position-relative">
+                                        <div class="picture-block">
+                                            <div class="d-block justify-content-center">
+                                                <img class="img-fluid align-items-lg-center" src="@_productsRepository.GetPic(item)" alt="Card image cap"/>
+                                            </div>
+                                        </div>
+                                        <div class="btns">
+                                            <div class="wishlist container-fluid">
+                                                <i class="bi bi-heart"
+                                                   onclick="window.test1(this);">
+                                                </i>
+                                            </div>
+                                            <div class="cart">
+                                                <i class="bi bi-heart"
+                                                   onclick="window.test1(this);">
+                                                </i>
+                                            </div>
+                                            <div class="info">
+                                                <i class="bi bi-heart"
+                                                   onclick="window.test1(this);">
+                                                </i>
+                                            </div>
+                                        </div>
+                                        @if (User.Identity.IsAuthenticated)
+                                        {
+                                            <div class="settings">
+                                                <a asp-page="/Products/ProductPictureEdit" asp-route-id="@item.Id">
+                                                    <i class="bi bi-image"></i>
+                                                </a>
+                                            </div>
+                                            <div class="text-start position-absolute top-0">
+                                                <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">
+                                                    <i class="bi bi-gear-fill"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="text1 text-center">
+                                            <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">@item.ProductName</a>
+                                        </div>
+                                        <div class="text-center">
+                                            @if (item.IsDiscount)
+                                            {
+                                                <p class="card-text">@priceOut ₽</p>
+                                                var priceOutQ = ((decimal)item.Price * 100 / item.DiscountPercent / 100.0m);
+                                                <p class="card-text">@priceOutQ ₽</p>
+                                            }
+                                            else
+                                            {
+                                                <p class="card-text">@priceOut ₽</p>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                        }
+                    }
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

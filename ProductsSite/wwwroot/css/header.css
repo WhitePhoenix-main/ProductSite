@@ -81,9 +81,14 @@
     text-align: center;
     margin-right: 10px;
 }
-.notif-btn{
+.test{
+    vertical-align: center;
 }
-.compare-btn span, .wishlist-btn span, .cart-btn span{
+.compare-btn span, .wishlist-btn span, .cart-btn span, .notif-btn span, .logout-btn span{
+    color: #FFFFFF;
+}
+.login-btn{
+    background-color: #D10024;
     color: #FFFFFF;
 }
 

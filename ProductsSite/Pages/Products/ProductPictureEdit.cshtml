@@ -1,10 +1,9 @@
 @page
-@using Microsoft.EntityFrameworkCore
+
 @using System.IO
-@model ProductsSite.ProductEditModel
-@inject ProductsSite.ProductsSiteContext _context
+@model ProductsSite.ProductPictureEditModel
 @inject IProductsRepository _productsRepository
-<link rel="stylesheet" href="/css/ProductEditPage.css" asp-append-version="true">
+<link rel="stylesheet" href="/css/PictureUpload.css" asp-append-version="true">
 @{
     ViewData["Title"] = "Edit";
 }
@@ -28,13 +27,8 @@
         </div>
         <div class="category-settings m-2">
             <form enctype="multipart/form-data" method="post">
-                <input type="hidden" asp-for="ProductRecord.Id"/>
-
-                @if (!Model.IsNewRec)
-                {
-                    <input type="file" name="pic">
-                    <input type="checkbox" asp-for="ProductRecord.OnPreview"/>
-                }
+                <input type="hidden" asp-for="ProductId"/>
+                <input type="file" name="pic">
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </div>
@@ -54,17 +48,58 @@
                 {
                     var images = Directory.GetFiles(_productsRepository.GetFolder(Model.ProductRecord), "*.*");
                     var temp = "";
-                    @foreach (var el in images)
-                    {
-                        <div>
-                            @*TODO: Переделать логику показа картинок, перенести метод в репозиторий*@
-                            @{ temp = el.Substring(el.IndexOf("\\pics")); }
-                            <img class="img-fluid" src="@temp" alt="Card image cap"/>
+                    <div class="col-md-12">
+                        <div class="row row-cols-6 justify-content-center">
+                            @foreach (var el in images)
+                            {
+                                <div class="picture-block m-2 border rounded">
+                                    @*TODO: Переделать логику показа картинок, перенести метод в репозиторий*@
+                                    @{
+                                        temp = el.Substring(el.IndexOf("\\pics"));
+                                        var fileName = System.IO.Path.GetFileName(temp);
+                                    }
+
+                                    <div class="d-block justify-content-center">
+                                        <img class="img-fluid" src="@temp" alt="Card image cap"/>
+                                    </div>
+                                    <form method="post" asp-page-handler="DeleteImage">
+                                        <input type="hidden" asp-for="ProductId"/>
+                                        <input type="hidden" asp-for="FileName" value="@fileName"/>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col text-end position-absolute top-0 p-0">
+                                                    <button type="submit" class="del-pic-btn">
+                                                        <i class="bi bi-x-circle-fill"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <form method="post" asp-page-handler="SetPreview">
+                                        <input type="hidden" asp-for="ProductId"/>
+                                        <input type="hidden" asp-for="FileName" value="@fileName"/>
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col text-center position-absolute bottom-0 pb-2">
+                                                    @if (Model.ProductRecord.PreviewName == fileName)
+                                                    {
+                                                        <button type="submit" class="btn btn-secondary" disabled>Превью</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="submit" class="btn btn-primary">Установить</button>
+                                                    }
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            }
                         </div>
-                    }
+                    </div>
                 }
             }
-            
+
         </div>
     </div>
 </div>

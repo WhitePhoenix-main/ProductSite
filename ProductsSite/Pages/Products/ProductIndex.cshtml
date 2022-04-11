@@ -1,33 +1,15 @@
 @page
 @System.Globalization.CultureInfo.CurrentUICulture
 @using ProductsSite.Pages.Wishlist.Data
+@using Microsoft.EntityFrameworkCore
 @model ProductsSite.ProductIndexModel
 @inject IProductsRepository _productsRepository
+@inject ProductsSiteContext _context
 @* <link rel="stylesheet" href="/css/productsBox.css" asp-append-version="true">  *@
 <script src="/css/1.js" asp-append-version="true"></script>
 <link rel="stylesheet" href="/css/ProductInd.css" asp-append-version="true">
-@*<script>
-function toggleWish(el) {
-    console.log(el);
-    var id = el.dataset.productId;
-axios({
-  method: 'post',
-  url: '/wishlist/wishlist?handler=add',
-  data: {
-    id: id
-  }
-});
-}
-</script>*@
+
 @inject UserManager<SiteUsers> _manager
-@*@{
-    ViewData["Title"] = "Index";
-    /*var dbContext = Model.Context;*/
-    var userId = "";
-    if (User.Identity.IsAuthenticated)
-        userId = (await _manager.FindByNameAsync(User.Identity!.Name))?.Id;
-    
-}*@
 
 <h1>Index</h1>
 @if (User.Identity?.IsAuthenticated ?? false)
@@ -38,7 +20,20 @@ axios({
 }
 <div class="row">
     <div class="col-md-3">
-        <div>bcvbcvb</div>
+        @{
+            var search = (string?)ViewData["search"];
+            var productTypes = _context.Product.AsNoTracking()
+                .Select(x => x.CategoryId)
+                .OrderBy(x => x)
+                .Distinct()
+                .Select(x => new SelectListItem(x, x))
+                .ToList();
+            productTypes.Insert(0, new SelectListItem("Все категории", ""));
+        }
+        <form method="get" action="/Products/ProductIndex">
+            <input class="input" placeholder="Поиск по сайту" name="search" value="@search"/>
+            <button type="submit" class="search-btn">Найти</button>
+        </form>
     </div>
     <div class="col-md-9">
         <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4">
@@ -49,8 +44,12 @@ axios({
                 var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
                 <div>
                     <div class="card mb-3">
-                        <div class="card-picture position-relative">
-                            <img class="img-fluid" src="@_productsRepository.GetPic(item)" alt="Card image cap"/>
+                        <div class="wrapper card-picture position-relative">
+                            <div class="picture-block">
+                                <div class="d-block justify-content-center">
+                                    <img class="img-fluid align-items-lg-center" src="@_productsRepository.GetPic(item)" alt="Card image cap"/>
+                                </div>
+                            </div>
                             <div class="btns">
                                 <div class="wishlist container-fluid">
                                     <i class="bi bi-heart"
@@ -75,42 +74,40 @@ axios({
                                         <i class="bi bi-image"></i>
                                     </a>
                                 </div>
+                                <div class="text-start position-absolute top-0">
+                                    <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">
+                                        <i class="bi bi-gear-fill"></i>
+                                    </a>
+                                </div>
                             }
 
                         </div>
                         <div class="card-body">
-                            <div class="text-center">
+                            <div class="text1 text-center">
                                 <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">@item.ProductName</a>
                             </div>
                             <div class="text-center">
-                                <p class="card-text">@priceOut ₽</p>
+                                @if (item.IsDiscount)
+                                {
+                                    <p class="card-text">@priceOut ₽</p>
+                                    var priceOutQ = ((decimal)item.Price * 100 / item.DiscountPercent / 100.0m);
+                                    <p class="card-text">@priceOutQ ₽</p>
+                                }
+                                else
+                                {
+                                    <p class="card-text">@priceOut ₽</p>
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
             @*var priceOut = ((decimal)item.Price / 100.0m).ToString("0.00");
-            <div class="product-box">
-                <div class="product-inner">
-                    <div class="product-wrap">
-                        <div class="pic">
-                            <img src="@_productsRepository.GetPic(item)"/>
-                        </div>
-                        <div class="actions">
+            
                             <a asp-page="/Products/ProductEdit" asp-route-id="@item.Id">Edit</a>
                             <a asp-page="/Products/ProductDetails" asp-route-id="@item.Id">Details</a>
                             <a asp-page="/Products/ProductDelete" asp-route-id="@item.Id">Delete</a>
-                        </div>
-                    </div>
-                    <div class="product-info">
-                        <h3 class="product-title">
-                            <a href="">@item.ProductName</a>
-                        </h3>
-                        <span class="price">@priceOut ₽</span>
-                    </div>
-                </div>
-            </div>*@
+                        *@
             }
         </div>
-
     </div>
 </div>

@@ -1,0 +1,16 @@
+﻿@page "/Admin/UserRoles"
+@model ProductsSite.UserRoles
+
+<h2>Изменение ролей для пользователя @Model.CurrentUser.Email</h2>
+ 
+<form method="post">
+    <input type="hidden" name="userId" value="@Model.CurrentUser.Id" />
+    <div class="form-group">
+        @foreach (IdentityRole role in Model.AllRoles)
+        {
+            <input type="checkbox" name="roles" value="@role.Name"
+                   @(Model.CurrentRoles.Contains(role.Name) ? "checked=\"checked\"" : "") />@role.Name <br />
+        }
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>h

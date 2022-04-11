@@ -10,7 +10,7 @@
 using System;
 using System.Reflection;
 
-[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-ProductsSite-71CB8933-44D0-4F75-B4D6-60135121A116")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("ProductsSite")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]

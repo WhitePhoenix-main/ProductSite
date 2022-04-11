@@ -1,0 +1,13 @@
+﻿@page
+@model ProductsSite.RoleEdit
+@{
+    var labelText = Model.IsNewRec ? "Новая роль" : "Редактировать";
+    var btnText = Model.IsNewRec ? "Добавить" : "Изменить";
+}
+<form method="post">
+    <div class="form-group">
+        <label asp-for="RoleName">@labelText</label>
+        <input name="name" class="form-control"/>
+    </div>
+    <button type="submit" class="btn btn-primary">@btnText</button>
+</form>
